@@ -1,1 +1,0 @@
-<?php	return array ( 0 => 'id', 1 => 'setname', 2 => 'settag', 3 => 'setvalue', 4 => 'setexplain', 5 => 'status', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'setname' => 'varchar(80)', 'settag' => 'varchar(80)', 'setvalue' => 'text', 'setexplain' => 'text', 'status' => 'tinyint(1)', ), );?>

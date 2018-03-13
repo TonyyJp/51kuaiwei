@@ -1,1 +1,0 @@
-<?php	return array ( 0 => 'id', 1 => 'recommendname', 2 => 'intergral', 3 => 'listorder', 4 => 'status', 5 => 'create_time', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'recommendname' => 'varchar(20)', 'intergral' => 'int(11)', 'listorder' => 'int(11)', 'status' => 'tinyint(1)', 'create_time' => 'int(11)', ), );?>
