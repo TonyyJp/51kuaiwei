@@ -1,0 +1,79 @@
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/jscal2.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/border-radius.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/win2k.css"/>
+<script type="text/javascript" src="../Public/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="../Public/js/calendar/lang/en.js"></script>
+<div class="main">
+    <div class="box_tit">
+        <h2>修改幻灯片</h2>
+    </div>
+    <div class="form_list">
+        <form method='post' id="form1" name="form1" action="{:U('Slide/update')}"  enctype="multipart/form-data">
+        <div class="form_list_top">
+
+        <dl>
+            <dt> 幻灯片标题：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="title" value="{$vo.title}"><strong class="red">*</strong>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 幻灯片图片：</dt>
+            <dd>
+                <notempty name="vo.img">
+                    <img src="__ROOT__/Uploads{$vo.img}" name="img" width="120" height="60" />
+                <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除图片吗？">删除图片</a>
+                <else/>
+                <input type="file" class="thumb" name="img" />
+                </notempty>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 幻灯片链接：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="url" value="{$vo.url}">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 排序值：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="listorder" value="{$vo.listorder}">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 状态：</dt>
+            <dd>
+                <select name="status">
+                    <option value="1" <eq name="vo.status" value="1">selected="selected"</eq>>显示</option>
+                    <option value="0" <eq name="vo.status" value="0">selected="selected"</eq>>不显示</option>
+                </select>
+            </dd>
+        </dl>
+        
+        </div>
+          
+
+        <div class="form_b">
+            <input type="hidden" name="id" value="{$vo.id}">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+   function foreverdelthumb(cur){
+       var nodename=$(cur).prev().attr('name');
+       var url="{:U('Slide/delfile',array('id'=>$vo['id'],'file'=>'"+nodename+"'))}";
+        //创建删除节点
+        $.get(url,function(){
+            //插入新节点
+            var html='<dd>\r\n<input type="file" class="thumb" name="'+nodename+'" />\r\n</dd>';
+            $(cur).parent().after(html);
+
+            //移除当前节点
+            $(cur).parent().remove();
+        });
+    }
+</script>
+<include file="Public:footer" />

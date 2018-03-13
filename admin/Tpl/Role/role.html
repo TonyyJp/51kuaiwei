@@ -1,0 +1,74 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>管理员授权</h2>
+    </div>
+    
+    <div class="list" style="margin-top: 10px;">
+        <form method=post id="form1" action="{:U('Role/setRole')}">
+        <div class="st_tree">
+            <ul class="m-treeview">
+                {$tree}
+            </ul>
+        </div>
+        <div class="th" style="clear: both; text-align: left; padding-left: 10px;">
+            <label class="select_all">&nbsp;<input type="checkbox" name="checkall" class="J_checkall" >&nbsp;全选/取消</label>   
+            <input type="submit" value="授 权" class="submit btn7">
+            <input type="hidden" name="roleId" value="{$Think.get.id}">
+        </div>
+        </form>
+    </div>  
+    
+</div>
+<!-- 列表显示区域结束 -->
+<script type="text/javascript">
+$(function(){
+    $(".m-treeview .m-expanded ul").hide();
+    $(".m-treeview .m-expanded span").click(function(){
+
+        var $ul=$(this).siblings("ul");
+        if($ul.is(":visible")){
+            $(this).parent().attr("class","m-expanded");
+            $ul.hide(); 
+        }else{
+            $(this).parent().attr("class","m-collapsed");
+            $ul.show();
+        }
+    }); 
+});
+
+$(function() {
+
+    $('.J_checkall').live('click', function(){
+        
+        $('.J_checkitem').attr('checked', this.checked);
+        $('.J_checkall').attr('checked', this.checked);
+    });
+
+    $('.J_checkitem').live('click', function(){
+        var chk = $("input[type='checkbox']"),
+            count = chk.length,
+            num = chk.index($(this)),
+            level_top = level_bottom =  chk.eq(num).attr('level');
+        for(var i=num; i>=0; i--){
+            var le = chk.eq(i).attr('level');
+            if(eval(le) < eval(level_top)){
+                chk.eq(i).attr("checked", true);
+                var level_top = level_top-1;
+            }
+        }
+        for(var j=num+1; j<count; j++){
+            var le = chk.eq(j).attr('level');
+            if(chk.eq(num).attr("checked")) {
+                if(eval(le) > eval(level_bottom)) chk.eq(j).attr("checked", true);
+                else if(eval(le) == eval(level_bottom)) break;
+            }else{
+                if(eval(le) > eval(level_bottom)) chk.eq(j).attr("checked", false);
+                else if(eval(le) == eval(level_bottom)) break;
+            }
+        }
+    });
+    
+});
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,63 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>帐号推荐设置</h2>
+    </div>
+    <div class="operate">
+        <script type="text/javascript">
+            var addurl="{:U('Weixin/addtj')}";
+        </script>
+        <div class="fLeft">
+            <form id="form1" name="form1" method="post" action="{:U('Weixin/hot')}">
+                <input type="text" name="name" title="请输入关键字(公众帐号)" class="ipt5">
+                <select name="tj">
+                    <option value="-2" <eq name="tj" value="-2">selected="selected"</eq>>全部</option>
+                    <option value="1" <eq name="tj" value="1">selected="selected"</eq>>已推荐</option>
+                    <option value="0" <eq name="tj" value="0">selected="selected"</eq>>未推荐</option>
+                </select>
+                <input type="submit" class="submit btn5" value="查  询">
+            </form>
+        </div>
+        <notempty name="ISTASK">
+        <div class="fLeft">
+            <form id="form2" name="form2"  method="post" action="{:U('Weixin/tasktj')}">
+                <input type="text" name="taskmark" title="请输入任务标识码" class="ipt5" style="margin-left: 20px;">
+                <input type="submit" class="submit btn5" value="任务提交">
+            </form>
+        </div>
+        </notempty>
+    </div>
+    <div class="list">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr class="nbg">
+                <th width="40"><input type="checkbox" id="check"></th>
+                <th>编号</th>
+                <th>公众账号</th>
+                <th>所属分类</th>
+                <th>关注度</th>
+                <th>会员名</th>
+                <th>发布时间</th>
+                <th>操作</th>
+            </tr>
+            <volist name="list" id="vo">
+            <tr>
+                <td><input type="checkbox" name="key" value="{$vo.id}"></td>
+                <td>{$vo.id}</td>
+                <td>{$vo.pubaccount}</td>
+                <td>{$vo.catid|getCategoryName}</td>
+                <td>{$vo.hits}</td>
+                <td>{$vo.membername}</td>
+                <td>{$vo.create_time|toDate="Y-m-d H:i"}</td>
+                <td>
+                    <a href="{:U('Weixin/addtj',array('id'=>$vo['id']))}">推荐</a>
+                </td>    
+            </tr>
+            </volist>
+            </tbody>
+        </table>
+        <div class="th" style="clear: both;">{$page}</div>
+    </div>
+</div>
+
+<include file="Public:footer" />

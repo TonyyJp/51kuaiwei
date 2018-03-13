@@ -1,0 +1,134 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <link type="text/css" rel="stylesheet" href="add_gongzhonghao_files/style.css">
+    <script src="add_gongzhonghao_files/v.js" charset="utf-8"></script><script>window.jQuery || document.write('<script src="http://www.weixinqun.com/template/wap/js/jquery-2.0.3.min.js"><\/script>')</script><script src="add_gongzhonghao_files/jquery-2.js"></script>
+	<script type="text/javascript" src="add_gongzhonghao_files/hammer.js"></script>
+	<script type="text/javascript" src="add_gongzhonghao_files/common.js"></script>
+	<script src="add_gongzhonghao_files/jquery.js" type="text/javascript"></script>
+    <script>
+          $(document).ready(function(){
+			  $(".tab").each(function(i) {
+				  $(this).click(function(){
+					  $(".tab").removeClass("cur");
+					  $(this).addClass("cur");
+					  $("#cont .pubcon").hide();
+					  $("#cont .pubcon").eq(i).show();
+					  });
+            });
+	})
+    </script>
+    <title>发布二维码</title>
+<meta name="keywords" content="发布二维码"><meta name="description" content="发布二维码"></head>
+<body>
+	<header class="fixed-top head">
+      <div class="fixed">
+    	<div class="headlf fl"><a href="http://www.weixinqun.com/"><img src="add_gongzhonghao_files/logo.png"></a></div>
+        <div class="headrg fr"><a href="http://www.weixinqun.com/search.html"><img src="add_gongzhonghao_files/search.png"></a><a class="headpub" href="javascript:;"><img src="add_gongzhonghao_files/fenl.png"></a></div>
+      </div>
+      <div style="-moz-user-select: none;" class="menu-fn menu hide-me" id="more-fn">
+          <include file="Public:nav" />
+      </div>
+    </header>
+    <div class="wrap-page">
+    <form id="formwxq" action="/user-gzh-action-save.html" method="post" enctype="multipart/form-data" onSubmit="return validate_form(this)">
+        <div class="release_all">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">	
+              <tbody><tr><td class="rel_bt">发布类别：</td><td><select onChange="self.location.href=options[selectedIndex].value">
+                      <option value="/user-weixinqun-action-add.html">微信群</option>
+                      <option value="/user-gr-action-add.html">个人微信</option>
+                      <option selected="selected" value="/user-gzh-action-add.html">微信公众号</option>
+                    </select><label>提示：请选择正确的分类</label></td></tr>
+              <tr><td class="rel_bt">栏目：</td><td><input id="hidden_gztype" name="gztype" value="0" type="hidden">
+                    <p class="fspan" id="span_gztype"><select id="gztype_top" name="gztype_top"><option selected="selected" value="0">请选择..</option><option value="500">女性</option><option value="1000">健康</option><option value="1500">娱乐</option><option value="2000">美食</option><option value="2500">育儿</option><option value="3000">购物</option><option value="3500">时尚</option><option value="4000">交友</option><option value="4500">旅游</option><option value="5000">媒体</option><option value="5500">微小店</option><option value="6000">文化</option><option value="6500">房产</option><option value="7000">汽车</option><option value="7500">财经</option><option value="8000">军事</option><option value="8500">医疗</option><option value="9500">科技</option><option value="10000">体育</option><option value="10500">教育</option><option value="11500">创意</option><option value="12000">家居</option><option value="12500">职场</option><option value="13000">星座</option><option value="13500">美女</option><option value="14000">搞笑</option><option value="14500">音乐</option><option value="15500">明星</option><option value="16500">游戏</option><option value="17000">八卦</option><option value="17500">互联网</option><option value="18000">微商</option><option value="18500">微营销教学</option><option value="19000">公众号开发</option></select></p>
+                    <p class="fspan" id="span_gztype_son"></p>
+                    <p class="fspan" id="span_gztype_sec"><select id="gztype_son" name="gztype_son"><option selected="selected" value="0">请选择..</option></select></p>
+                    <script language="javascript" type="text/javascript" src="add_gongzhonghao_files/enums.js"></script>
+                        <script language="javascript" type="text/javascript" src="add_gongzhonghao_files/gztype.js"></script>
+                        <script language="javascript" type="text/javascript">MakeTopSelect("gztype", 0);</script></td></tr>
+              <tr><td class="rel_bt">地区：</td><td><input id="hidden_nativeplace" name="nativeplace" value="0" type="hidden">
+                    <p class="fspan" id="span_nativeplace"><select id="nativeplace_top" name="nativeplace_top"><option selected="selected" value="0">请选择..</option><option value="1000">北京市</option><option value="1500">天津市</option><option value="2000">河北省</option><option value="2500">山西省</option><option value="3000">内蒙古自治区</option><option value="3500">辽宁省</option><option value="4000">吉林省</option><option value="4500">黑龙江省</option><option value="5000">上海市</option><option value="5500">江苏省</option><option value="6000">浙江省</option><option value="6500">安徽省</option><option value="7000">福建省</option><option value="7500">江西省</option><option value="8000">山东省</option><option value="8500">河南省</option><option value="9000">湖北省</option><option value="9500">湖南省</option><option value="10000">广东省</option><option value="10500">广西壮族自治区</option><option value="11000">海南省</option><option value="11500">重庆市</option><option value="12000">四川省</option><option value="12500">贵州省</option><option value="13000">云南省</option><option value="13500">西藏自治区</option><option value="14000">陕西省</option><option value="14500">甘肃省</option><option value="15000">青海省</option><option value="15500">宁夏回族自治区</option><option value="16000">新疆维吾尔自治区</option><option value="17000">香港特别行政区</option><option value="17500">澳门特别行政区</option></select></p>
+                    <p class="fspan" id="span_nativeplace_son"></p>
+                    <p class="fspan" id="span_nativeplace_sec"><select id="nativeplace_son" name="nativeplace_son"><option selected="selected" value="0">请选择..</option></select></p>
+                    <script language="javascript" type="text/javascript" src="add_gongzhonghao_files/enums.js"></script>
+                    <script language="javascript" type="text/javascript" src="add_gongzhonghao_files/nativeplace.js"></script>
+                    <script language="javascript" type="text/javascript">MakeTopSelect("nativeplace", 0);</script></td></tr>
+              <tr><td class="rel_bt">QQ号：</td><td><input style="width:200" id="qq" name="qq" type="text"></td></tr>
+              <tr><td class="rel_bt">现有粉丝：</td><td><input name="rensu2" id="rensu2" style="width:200" type="text"></td></tr>
+               
+              <tr><td class="rel_bt">类型：</td><td><input name="lixing" style="display:inline;width:auto;" value="1" type="radio">服务号 &nbsp;<input name="lixing" style="display:inline;width:auto;" value="2" type="radio">订阅号</td></tr>
+              <tr><td class="rel_bt">认证：</td><td><input name="renzhen" style="display:inline;width:auto;" value="1" type="radio">已认证 &nbsp;<input name="renzhen" style="display:inline;width:auto;" value="2" type="radio">未认证</td></tr>
+              
+              <tr><td class="rel_bt">公众号名称：</td><td><input name="title" id="title" class="i1" onkeyup='value=value.substr(0,40);document.getElementById("strcount1").innerHTML=40-value.length;' type="text"><label>还可输入<p class="fspan" id="strcount1">40</p>个字符</label></td></tr>
+              <tr><td class="rel_bt">公众号：</td><td><input name="weixinhao" id="weixinhao" style="width:200" type="text"></td></tr>
+              
+              <tr><td class="rel_bt">公众号简介：</td><td><textarea name="description" id="description" onkeyup='value=value.substr(0,255);document.getElementById("strcount").innerHTML=255-value.length;'></textarea><label>还可以输入<p class="fspan" id="strcount">255</p>个字</label></td></tr>
+              <tr><td class="rel_bt">头像：</td><td><input name="fm" id="fm" style="display:inline;" type="file"></td></tr>
+              <tr><td class="rel_bt">二维码：</td><td><input name="rwm" id="rwm" style="display:inline;" type="file"></td></tr>
+              <tr><td></td><td><input value="" name="img" id="imgfm" type="hidden">
+<input value="" name="litpic" id="litpic" type="hidden"><input name="id" value="" type="hidden"><input value="提交" class="tijiao" type="submit"></td></tr>
+          </tbody></table>
+		</div>
+        </form>
+<script>
+
+    function validate_required(field,alerttxt)
+    {
+    with (field)
+      {
+      if (value==null||value==""||value==0)
+        {alert(alerttxt);return false}
+      else {return true}
+      }
+    }
+    
+    function validate_form(thisform)
+    {
+        
+    with (thisform)
+      {
+
+          if (validate_required(wxqtype,"公众号栏目没选择!")==false)
+            {wxqtype.focus();return false}
+            
+          if (validate_required(qq,"QQ号没填写!")==false)
+            {qq.focus();return false}
+            
+          if (validate_required(rensu2,"粉丝人数没填写!")==false)
+            {rensu2.focus();return false}
+            
+           
+             
+              
+          if (validate_required(title,"公众号名称必须填写!")==false)
+            {title.focus();return false}
+            
+              
+          if (validate_required(description,"公众号简介必须填写!")==false)
+            {description.focus();return false}
+            
+            
+      }
+    }
+</script>
+	</div>
+    
+	<footer class="fixed-bottom foot">
+    	<div class="foot_return">
+        	<span><a class="home" href="http://www.75820.com/user-weixinqun.html">个人中心</a><a class="srh" href="http://www.75820.com/user-logout.html">退出</a></span>
+        </div>
+        <div class="foot_txt">
+        <include file="Public:footer" />
+        </div>
+	
+    </footer><iframe style="display: none; width: 1px; height: 1px;" src="add_gongzhonghao_files/mp-cdn.htm"></iframe>
+	<script>$(document).ready(function(){
+    $(".btimg").lazyload();
+})</script>
+
+
+</body></html>

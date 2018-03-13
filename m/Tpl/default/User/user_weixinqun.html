@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link type="text/css" rel="stylesheet"
+	href="../mobile_file/css/style.css">
+<script src="../mobile_file/img/v.htm" charset="utf-8"></script>
+<script>window.jQuery || document.write('<script src="template/wap/../mobile_file/js/jquery-2.0.3.min.js"><\/script>')</script>
+<script src="../mobile_file/js/jquery-2.js"></script>
+<script type="text/javascript" src="../mobile_file/js/hammer.js"></script>
+<script type="text/javascript" src="../mobile_file/js/common.js"></script>
+<script src="../mobile_file/js/jquery.js" type="text/javascript"></script>
+<script>
+          $(document).ready(function(){
+			  $(".tab").each(function(i) {
+				  $(this).click(function(){
+					  $(".tab").removeClass("cur");
+					  $(this).addClass("cur");
+					  $("#cont .pubcon").hide();
+					  $("#cont .pubcon").eq(i).show();
+					  });
+            });
+	})
+    </script>
+    <title>已发布的微信群</title>
+<meta name="keywords" content="已发布的微信群"><meta name="description" content="已发布的微信群"></head>
+<body>
+	<header class="fixed-top head">
+      <div class="fixed">
+    	<div class="headlf fl"><a href="index.php"><img src="../mobile_file/img/logo.png"></a></div>
+        <div class="headrg fr"><a href="index.php?m=Index&a=search"><img src="../mobile_file/img/search.png"></a><a class="headpub" href="javascript:;"><img src="../mobile_file/img/fenl.png"></a></div>
+       </div>
+      <div style="-moz-user-select: none;" class="menu-fn menu hide-me" id="more-fn">
+          <include file="Public:nav" />
+      </div>
+    </header>
+    <div class="wrap-page">
+            <div class="myself">
+        	<div class="myhead fl"><img src="../mobile_file/img/avatar.jpg"></div>
+            <div class="myinfo fl">
+            	<ul>
+                	<li><a href="index.php?m=User&a=user_edit">修改个人信息</a></li>
+                	<li><a href="index.php?m=User&a=user_pass">修改密码</a></li>
+					<li><a href="index.php?m=Index&a=weixin_add">发布二维码</a></li>
+					
+                </ul>
+            </div>
+            <div class="my_off"><a href="index.php?m=User&a=login_out"><img src="../mobile_file/img/off.gif">退出</a></div>
+            <div class="clr"></div>
+        </div>
+        
+        <div class="my_nav">
+        	<ul>
+            	<li class="<?php if($_GET['id'] == 44) echo 'cur';?>"><a href="index.php?m=User&a=user_weixinqun&id=44">已发布的微信群</a></li>
+                <li class="<?php if($_GET['id'] == 48) echo 'cur';?>"><a href="index.php?m=User&a=user_weixinqun&id=48">已发布的个人微信</a></li>
+                <li class="<?php if($_GET['id'] == 47) echo 'cur';?>"><a href="index.php?m=User&a=user_weixinqun&id=47">已发布的公众号</a></li>
+                <div class="clr"></div>
+            </ul>
+        </div>        <div class="my_cont">
+            <div class="my_tab">
+                <table class="my_tabb" border="0" cellpadding="0" cellspacing="0" width="100%">
+   	                    <tbody><tr>
+                            <td width="15%">ID</td>
+                            <td width="25%">标题</td>
+                            <td width="20%">栏目</td>
+                            <td width="25%">时间</td>
+                            <td width="15%">操作</td>
+                        </tr>
+                        <volist name="today_qun" id="data">
+                            <tr>
+                                <td>{$data['id']}</td>
+                                <td>{$data['title']}</td>
+                                <td>{$data['catid']}</td>
+                                <td>{$data['create_time']}</td>
+                                <td><a href="index.php?m=Index&a=weixin_add&id={$data['publish_type_id']}&ctid={$data['id']}">编辑</a><a href="index.php?m=Index&a=weixin_del&id={$data['id']}">删除</a></td>
+                            </tr>
+                        </volist>
+                    
+                    </tbody><tbody>
+                                            </tbody>
+                </table>
+            </div>
+        </div>
+	</div>
+    
+	<footer class="fixed-bottom foot">
+<div class="foot_return"><span><a class="home"
+	href="index.php?m=User">个人中心</a><a
+	class="srh" href="index.php?m=User&a=login_out">退出</a></span></div>
+       <div class="foot_txt">
+	<include file="Public:footer" />
+	
+	</div>
+    </footer><iframe style="display: none; width: 1px; height: 1px;" src="../mobile_file/img/mp-cdn.htm"></iframe>
+	<script>$(document).ready(function(){
+    $(".btimg").lazyload();
+})</script>
+
+
+</body></html>

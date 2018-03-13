@@ -1,0 +1,53 @@
+<include file="Public:header" />
+
+<div class="main">
+    <div class="box_tit">
+        <h2>添加幻灯片</h2>
+    </div>
+    <div class="form_list">
+        <form method='post' id="form1" name="form1" action="{:U('Slide/insert')}"  enctype="multipart/form-data">
+        <div class="form_list_top">
+
+        <dl>
+            <dt> 幻灯片标题：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="title"><strong class="red">*</strong>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 幻灯片图片：</dt>
+            <dd>
+                <input name="img" class="thumb" type="file" />
+            </dd>
+        </dl>
+        <dl>
+            <dt> 幻灯片链接：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="url">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 排序值：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="listorder" value="0">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 状态：</dt>
+            <dd>
+                <select name="status">
+                    <option value="1">显示</option>
+                    <option value="0">不显示</option>
+                </select>
+            </dd>
+        </dl>
+        
+        </div>
+        <div class="form_b">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+</div>
+
+<include file="Public:footer" />

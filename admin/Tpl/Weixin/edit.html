@@ -1,0 +1,677 @@
+<include file="Public:header" />
+<script type="text/javascript" src="../Public/js/area.js"></script>
+<script>var ajaxurl="{:U('Ajax/getArea')}"; var city="{$vo.city}"</script>
+<script type="text/javascript" src="../Public/js/select-option-disabled-emulation.js"></script>
+<div class="main">
+    <div class="box_tit">
+        <h2>修改内容</h2>
+    </div>
+    <div class="form_list w12">
+        <include file="Public:notice" />
+        <form method='post' id="form1" name="form1" action="{:U('Weixin/update')}"  enctype="multipart/form-data">
+        <div class="listtop">
+            <dl>
+                <dt> 发布类别：</dt>
+                <dd>
+                    <select name="publish_type_id" id="publish_type_id" onchange="change_publish_type()" disabled="disabled">
+                        <volist name="publish_type" id="ptvo">
+                            <option value="{$ptvo['id']}" <eq name="vo.publish_type_id" value="$ptvo.id">selected="selected"</eq>>
+                                {$ptvo['catname']}
+                            </option>
+                        </volist> 
+                    </select>
+                </dd>
+            </dl>
+            <!-- tab-content-1 开始-->
+            <if condition="$vo.publish_type_id eq 44">
+            <div class="tab-content tab-content-1">
+                <dl>
+                    <dt> 栏目：</dt>
+                    <dd>
+                        <select name="catid" id="catid">
+                            <volist name="categorylist" id="catvo">
+                                <if condition="$categorylist[$key]['level'] egt $categorylist[$key+1]['level']">
+                                    <option value="{$catvo['id']}" <eq name="vo.catid" value="$catvo['id']">selected="selected"</eq>>
+                                <else />
+                                <option value="{$catvo['id']}" disabled="disabled">
+                                </if>
+
+                                <for start="1" end="$catvo['level']">
+                                &nbsp;&nbsp;
+                                </for>
+                                <if condition="$catvo['level'] gt 1">
+                                ├&nbsp;
+                                </if>
+                                {$catvo['catname']}
+                                </option>
+                            </volist> 
+                        </select>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 地区：</dt>
+                    <dd>
+                        <select name="province" id="province">
+                            <option value="-1" selected>省份</option>
+                            <volist name="province" id="one">
+                                <option value="{$one.id}">{$one.area_name}</option>
+                            </volist>
+                        </select>
+                        <select name="city" id="city">
+                            <option value="-1">城市</option>
+                        </select>
+                        <span class="fontcolor">不选择,将默认是中国</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>QQ：</dt>
+                    <dd>
+                    <input type="text" name="qq" id="qq" value="{$vo.qq}" class="ipt4">
+
+                    <span class="fontcolor">常用QQ</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 群上限人数：</dt>
+                    <dd>
+                        <select name="qun_shang_xian" id="qun_shang_xian">
+                            <volist name="qun_shang_xian" id="qsxvo"  key="k">
+                                <option value="{$k}" <eq name="vo.qun_shang_xian" value="$k">selected="selected"</eq>>
+                                    {$qsxvo}
+                                </option>
+                            </volist> 
+                        </select>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 群现有人数：</dt>
+                    <dd>
+                        <input type="text" class="ipt3" name="renshu" value="{$vo.renshu}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 群主微信号：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="wxaccount" value="{$vo.wxaccount}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 微信群名称：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="pubaccount" value="{$vo.pubaccount}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 微信群简介：</dt>
+                </dl>
+                <div class="listbottom">
+                    <textarea name="content" id="myEditor1">{$vo.content}</textarea>
+                    <script type="text/javascript">
+                        var editor = new UE.ui.Editor();
+                        editor.render("myEditor1");
+                        //1.2.4以后可以使用一下代码实例化编辑器
+                        //UE.getEditor('myEditor')
+                    </script>
+                </div>
+                <dl>
+                    <dt> 封面：</dt>
+                    <dd>
+                        <notempty name="vo.logo">
+                       
+                        <img src="__ROOT__/Uploads/{$vo.logo}" name="logo" width="60" height="60" />
+                        <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除头像吗？">删除封面</a>
+                        <else/>
+                        <input type="file" class="thumb" name="logo" />
+                        </notempty>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 网络封面：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="weblogo" value="{$vo.weblogo}"><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 二维码：</dt>
+                    <dd>
+                        <notempty name="vo.qrcode">
+                        <img src="__ROOT__/Uploads/{$vo.qrcode}" name="qrcode" width="60" height="60" />
+                        <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除二维码吗？">删除二维码</a>
+                        <else/>
+                        <input type="file" class="thumb" name="qrcode" />
+                        </notempty>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 网络二维码：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="webqrcode" value="{$vo.webqrcode}"><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> title：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="title" value="{$vo.title}"><span class="fontcolor">网页title标签的设置(SEO优化)，不填则默认填写公众帐号</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> keywords：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="keywords" value="{$vo.keywords}"><span class="fontcolor">网页meta标签 keywords网页关键词的设置(SEO优化)</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> description：</dt>
+                    <dd>
+                        <textarea name="description" style='float: left;'>{$vo.description}</textarea><span class="fontcolor" style='float: left; width: 140px;'>网页meta标签 description网页描述的设置(SEO优化)</span>
+                    </dd>
+                </dl>
+            </div>
+            </if>
+            <!-- tab-content-1 结束-->
+            <!-- tab-content-2 开始-->
+            <if condition="$vo.publish_type_id eq 48">
+            <div class="tab-content tab-content-2">
+                <dl>
+                    <dt> 栏目：</dt>
+                    <dd>
+                        <select name="catid" id="catid">
+                            <volist name="categorylist" id="catvo">
+                                <if condition="$categorylist[$key]['level'] egt $categorylist[$key+1]['level']">
+                                    <option value="{$catvo['id']}" <eq name="vo.catid" value="$catvo['id']">selected="selected"</eq>>
+                                <else />
+                                <option value="{$catvo['id']}" disabled="disabled">
+                                </if>
+
+                                <for start="1" end="$catvo['level']">
+                                &nbsp;&nbsp;
+                                </for>
+                                <if condition="$catvo['level'] gt 1">
+                                ├&nbsp;
+                                </if>
+                                {$catvo['catname']}
+                                </option>
+                            </volist> 
+                        </select>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 地区：</dt>
+                    <dd>
+                        <select name="province" id="province">
+                            <option value="-1" selected>省份</option>
+                            <volist name="province" id="one">
+                                <option value="{$one.id}">{$one.area_name}</option>
+                            </volist>
+                        </select>
+                        <select name="city" id="city">
+                            <option value="-1">城市</option>
+                        </select>
+                        <span class="fontcolor">不选择,将默认是中国</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 微信号：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="wxaccount" value="{$vo.wxaccount}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 手机号：</dt>
+                    <dd>
+                    <input type="text" name="phone" id="phone" value="{$vo.phone}" class="ipt5">
+
+                    <span class="fontcolor">电话或手机</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> QQ：</dt>
+                    <dd>
+                    <input type="text" name="qq" id="qq" value="{$vo.qq}" class="ipt4">
+
+                    <span class="fontcolor">常用QQ</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 昵称：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="pubaccount" value="{$vo.pubaccount}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 简介：</dt>
+                </dl>
+                <div class="listbottom">
+                    <textarea name="content" id="myEditor2">{$vo.content}</textarea>
+                    <script type="text/javascript">
+                        var editor = new UE.ui.Editor();
+                        editor.render("myEditor2");
+                        //1.2.4以后可以使用一下代码实例化编辑器
+                        //UE.getEditor('myEditor')
+                    </script>
+                </div>
+                <dl>
+                    <dt> 封面：</dt>
+                    <dd>
+                        <notempty name="vo.logo">
+                       
+                        <img src="__ROOT__/Uploads/{$vo.logo}" name="logo" width="60" height="60" />
+                        <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除头像吗？">删除封面</a>
+                        <else/>
+                        <input type="file" class="thumb" name="logo" />
+                        </notempty>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 网络封面：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="weblogo" value="{$vo.weblogo}"><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 二维码：</dt>
+                    <dd>
+                        <notempty name="vo.qrcode">
+                        <img src="__ROOT__/Uploads/{$vo.qrcode}" name="qrcode" width="60" height="60" />
+                        <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除二维码吗？">删除二维码</a>
+                        <else/>
+                        <input type="file" class="thumb" name="qrcode" />
+                        </notempty>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 网络二维码：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="webqrcode" value="{$vo.webqrcode}"><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> title：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="title" value="{$vo.title}"><span class="fontcolor">网页title标签的设置(SEO优化)，不填则默认填写公众帐号</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> keywords：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="keywords" value="{$vo.keywords}"><span class="fontcolor">网页meta标签 keywords网页关键词的设置(SEO优化)</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> description：</dt>
+                    <dd>
+                        <textarea name="description" style='float: left;'>{$vo.description}</textarea><span class="fontcolor" style='float: left; width: 140px;'>网页meta标签 description网页描述的设置(SEO优化)</span>
+                    </dd>
+                </dl>
+            </div>
+            </if>
+            <!-- tab-content-2 结束-->
+            <!-- tab-content-3 开始-->
+            <if condition="$vo.publish_type_id eq 47">
+            <div class="tab-content tab-content-3">
+                <dl>
+                    <dt> 栏目：</dt>
+                    <dd>
+                        <select name="catid" id="catid">
+                            <volist name="categorylist" id="catvo">
+                                <if condition="$categorylist[$key]['level'] egt $categorylist[$key+1]['level']">
+                                    <option value="{$catvo['id']}" <eq name="vo.catid" value="$catvo['id']">selected="selected"</eq>>
+                                <else />
+                                <option value="{$catvo['id']}" disabled="disabled">
+                                </if>
+
+                                <for start="1" end="$catvo['level']">
+                                &nbsp;&nbsp;
+                                </for>
+                                <if condition="$catvo['level'] gt 1">
+                                ├&nbsp;
+                                </if>
+                                {$catvo['catname']}
+                                </option>
+                            </volist> 
+                        </select>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 地区：</dt>
+                    <dd>
+                        <select name="province" id="province">
+                            <option value="-1" selected>省份</option>
+                            <volist name="province" id="one">
+                                <option value="{$one.id}">{$one.area_name}</option>
+                            </volist>
+                        </select>
+                        <select name="city" id="city">
+                            <option value="-1">城市</option>
+                        </select>
+                        <span class="fontcolor">不选择,将默认是中国</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>QQ：</dt>
+                    <dd>
+                    <input type="text" name="qq" id="qq" value="{$vo.qq}" class="ipt4">
+
+                    <span class="fontcolor">常用QQ</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 现有粉丝：</dt>
+                    <dd>
+                        <input type="text" class="ipt3" name="renshu" value="{$vo.renshu}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 类型：</dt>
+                    <dd>
+                        <input type="radio" name="typeid" value="2" <eq name="vo.typeid" value="2">checked="checked"</eq>  />&nbsp;服务号&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="typeid" value="1" <eq name="vo.typeid" value="1">checked="checked"</eq>  />&nbsp;订阅号
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 认证：</dt>
+                    <dd>
+                        <input type="radio" name="renzheng" value="2" <eq name="vo.renzheng" value="2">checked="checked"</eq>  />&nbsp;已认证&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="renzheng" value="1" <eq name="vo.renzheng" value="1">checked="checked"</eq>  />&nbsp;未认证
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 公众号名称：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="pubaccount" value="{$vo.pubaccount}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 公众号：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="wxaccount" value="{$vo.wxaccount}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 公众号简介：</dt>
+                </dl>
+                <div class="listbottom">
+                    <textarea name="content" id="myEditor3">{$vo.content}</textarea>
+                    <script type="text/javascript">
+                        var editor = new UE.ui.Editor();
+                        editor.render("myEditor3");
+                        //1.2.4以后可以使用一下代码实例化编辑器
+                        //UE.getEditor('myEditor')
+                    </script>
+                </div>
+                <dl>
+                    <dt> 封面：</dt>
+                    <dd>
+                        <notempty name="vo.logo">
+                       
+                        <img src="__ROOT__/Uploads/{$vo.logo}" name="logo" width="60" height="60" />
+                        <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除头像吗？">删除封面</a>
+                        <else/>
+                        <input type="file" class="thumb" name="logo" />
+                        </notempty>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 网络封面：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="weblogo" value="{$vo.weblogo}"><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 二维码：</dt>
+                    <dd>
+                        <notempty name="vo.qrcode">
+                        <img src="__ROOT__/Uploads/{$vo.qrcode}" name="qrcode" width="60" height="60" />
+                        <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除二维码吗？">删除二维码</a>
+                        <else/>
+                        <input type="file" class="thumb" name="qrcode" />
+                        </notempty>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 网络二维码：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="webqrcode" value="{$vo.webqrcode}"><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> title：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="title" value="{$vo.title}"><span class="fontcolor">网页title标签的设置(SEO优化)，不填则默认填写公众帐号</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> keywords：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="keywords" value="{$vo.keywords}"><span class="fontcolor">网页meta标签 keywords网页关键词的设置(SEO优化)</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> description：</dt>
+                    <dd>
+                        <textarea name="description" style='float: left;'>{$vo.description}</textarea><span class="fontcolor" style='float: left; width: 140px;'>网页meta标签 description网页描述的设置(SEO优化)</span>
+                    </dd>
+                </dl>
+            </div>
+            </if>
+            <!-- tab-content-3 结束-->
+            <!-- tab-content-4 开始-->
+            <if condition="$vo.publish_type_id eq 1">
+            <div class="tab-content tab-content-4">
+                <dl>
+                    <dt> 栏目：</dt>
+                    <dd>
+                        <select name="catid" id="catid">
+                            <volist name="categorylist" id="catvo">
+                                <if condition="$categorylist[$key]['level'] egt $categorylist[$key+1]['level']">
+                                    <option value="{$catvo['id']}" <eq name="vo.catid" value="$catvo['id']">selected="selected"</eq>>
+                                <else />
+                                <option value="{$catvo['id']}" disabled="disabled">
+                                </if>
+
+                                <for start="1" end="$catvo['level']">
+                                &nbsp;&nbsp;
+                                </for>
+                                <if condition="$catvo['level'] gt 1">
+                                ├&nbsp;
+                                </if>
+                                {$catvo['catname']}
+                                </option>
+                            </volist> 
+                        </select>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 地区：</dt>
+                    <dd>
+                        <select name="province" id="province">
+                            <option value="-1" selected>省份</option>
+                            <volist name="province" id="one">
+                                <option value="{$one.id}">{$one.area_name}</option>
+                            </volist>
+                        </select>
+                        <select name="city" id="city">
+                            <option value="-1">城市</option>
+                        </select>
+                        <span class="fontcolor">不选择,将默认是中国</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>QQ：</dt>
+                    <dd>
+                    <input type="text" name="qq" id="qq" value="{$vo.qq}" class="ipt4">
+
+                    <span class="fontcolor">常用QQ</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 微信：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="wxaccount" value="{$vo.wxaccount}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 货源图片：</dt>
+                    <dd>
+                        <input type="file" class="huoyuan_img" name="img1" />
+                        <input type="file" class="huoyuan_img" name="img2" />
+                        <input type="file" class="huoyuan_img" name="img3" />
+                        <input type="file" class="huoyuan_img" name="img4" />
+                        <input type="file" class="huoyuan_img" name="img5" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 货源名称：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="pubaccount" value="{$vo.pubaccount}">
+                    </dd>
+                </dl>
+                <dl>
+                <dt> 货源卖点：</dt>
+                </dl>
+                <div class="listbottom">
+                    <textarea name="maidian" id="maidian">{$vo.maidian}</textarea>
+                </div>
+                <dl>
+                    <dt> 货源描述：</dt>
+                </dl>
+                <div class="listbottom">
+                    <textarea name="content" id="myEditor4">{$vo.content}</textarea>
+                    <script type="text/javascript">
+                        var editor = new UE.ui.Editor();
+                        editor.render("myEditor4");
+                        //1.2.4以后可以使用一下代码实例化编辑器
+                        //UE.getEditor('myEditor')
+                    </script>
+                </div>
+                <dl>
+                    <dt> 封面：</dt>
+                    <dd>
+                        <notempty name="vo.logo">
+                       
+                        <img src="__ROOT__/Uploads/{$vo.logo}" name="logo" width="60" height="60" />
+                        <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除头像吗？">删除封面</a>
+                        <else/>
+                        <input type="file" class="thumb" name="logo" />
+                        </notempty>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 网络封面：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="weblogo" value="{$vo.weblogo}"><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 二维码：</dt>
+                    <dd>
+                        <notempty name="vo.qrcode">
+                        <img src="__ROOT__/Uploads/{$vo.qrcode}" name="qrcode" width="60" height="60" />
+                        <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除二维码吗？">删除二维码</a>
+                        <else/>
+                        <input type="file" class="thumb" name="qrcode" />
+                        </notempty>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 网络二维码：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="webqrcode" value="{$vo.webqrcode}"><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> title：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="title" value="{$vo.title}"><span class="fontcolor">网页title标签的设置(SEO优化)，不填则默认填写公众帐号</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> keywords：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="keywords" value="{$vo.keywords}"><span class="fontcolor">网页meta标签 keywords网页关键词的设置(SEO优化)</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> description：</dt>
+                    <dd>
+                        <textarea name="description" style='float: left;'>{$vo.description}</textarea><span class="fontcolor" style='float: left; width: 140px;'>网页meta标签 description网页描述的设置(SEO优化)</span>
+                    </dd>
+                </dl>
+            </div>
+            </if>
+            <!-- tab-content-4 结束-->
+        </div>
+        
+        <div class="form_b">
+            <input type="hidden" name="id" value="{$vo.id}">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        //选择省份
+        $("#province option[value='{$vo.province}']").attr("selected", true); 
+        loadArea($("#province").val(),'city');
+        //选择城市
+        $("#province").change(function(){
+            var ajaxurl="{:U('Ajax/getArea')}";
+            var areaId=this.value;
+            var areaType='city';
+            var city="{$vo.city}";
+            
+            $.post(ajaxurl,{'areaId':areaId},function(data){
+
+                if(areaType==='city'){
+                   $('#'+areaType).html('<option value="-1">城市</option>');
+
+                   $('#district').html('<option value="-1">镇/区</option>');
+                }else if(areaType==='district'){
+                   $('#'+areaType).html('<option value="-1">镇/区</option>');
+                }
+                if(areaType!=='null'){
+                    $.each(data,function(no,items){
+                        if(items.id===city){
+                            $('#'+areaType).append('<option value="'+items.id+'" selected="selected">'+items.area_name+'</option>');
+                        }else{
+                            $('#'+areaType).append('<option value="'+items.id+'">'+items.area_name+'</option>');
+                        }
+                       
+                    });
+                    
+                }
+            });
+        });
+
+        //进入页面显示的内容块
+        //var tab = $("#publish_type_id").val();
+        //$(".tab-content").hide();
+        //$(".tab-content-"+tab).show();
+    });
+   function foreverdelthumb(cur){
+       var nodename=$(cur).prev().attr('name');
+       var url="{:U('Weixin/delfile',array('id'=>$vo['id'],'file'=>'"+nodename+"'))}";
+        //创建删除节点
+        $.get(url,function(){
+            //插入新节点
+            var html='<dd>\r\n<input type="file" class="thumb" name="'+nodename+'" />\r\n</dd>';
+            $(cur).parent().after(html);
+
+            //移除当前节点
+            $(cur).parent().remove();
+        });
+    }
+    /*
+    function change_publish_type(){
+        var tab = $("#publish_type_id").val();
+        $(".tab-content").hide();
+        $(".tab-content-"+tab).show();
+    }
+    */
+    function change_publish_type(){
+        self.location.reload(); 
+    }
+
+   
+</script>
+
+<include file="Public:footer" />

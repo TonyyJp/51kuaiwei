@@ -1,0 +1,9 @@
+<include file="Public:top" />
+    <include file="Public:header" />
+            <div data-role="content">
+                <h3>{$data.title}</h3>
+                 <span style="font-size: 12px;">发布时间：{$data.create_time|toDate='Y-m-d'}</span>
+                 {$data.content}
+                 
+            </div> 
+<include file="Public:bottom" />

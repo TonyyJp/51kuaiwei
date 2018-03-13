@@ -1,0 +1,34 @@
+<include file="Public:top" />
+    <include file="Public:header" />
+        <div data-role="content">              
+            <div style="padding-top:5px;">
+                <img src="<empty name='data.qrcode'>../Public/images/nopic.gif<else />__ROOT__/Uploads{$data.qrcode}</empty>" width="200" height="200" />
+                <p style="margin-top: 10px;color: #999999;">长按公众帐号选择框，全选复制公众帐号</p>
+            </div>
+            <div>
+                <ul  style="list-style: none;margin: 0;padding: 0">
+                    <li style="padding-bottom: 5px;">
+                        <div data-role="fieldcontain">
+                        <label for="name">公众账号:</label><input type="text" value="{$data.pubaccount}">
+                        </div>
+                    </li>
+                    <li style="padding-bottom: 5px;">
+                        
+                        <div data-role="fieldcontain">
+                        <label for="name">微信账号</label><input type="text" value="{$data.wxaccount}">
+                        </div>
+                    </li>
+                    <li><span>关注度：</span>{$data.hits}人关注</li>
+                    <li><span>评价度：</span><img src="../Public/images/xx{$data.xingji}.jpg" /></li>
+                    <li><span>官方网站：</span><notempty name="data.website"><a href='{$data.website}' target='_blank' rel="nofollow">{$data.title}官方网站</a></notempty></li>
+                    <li><span>新浪微博：</span><notempty name="data.sinaweibo"><a href='{$data.sinaweibo}' target='_blank' rel="nofollow">{$data.title}新浪微博</a></notempty></li>
+                    <li><span>腾讯微博：</span><notempty name="data.tencentweibo"><a href='{$data.tencentweibo}' target='_blank' rel="nofollow">{$data.title}腾讯微博</a></notempty></li>
+                    <li><span>所在地区：</span>中国&nbsp;{$data.province|getAreasName}&nbsp;{$data.city|getAreasName}</li>
+                    <li><span>收录时间：</span>{$data.create_time|toDate='Y-m-d'}</li>
+                    
+                </ul>
+
+            </div>
+            
+        </div>
+<include file="Public:bottom" />

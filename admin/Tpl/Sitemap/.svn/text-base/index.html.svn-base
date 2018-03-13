@@ -1,0 +1,71 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>系统设置</h2>
+    </div>
+    <div class="form_list">
+        <form method='post' id="form1" name="form1" action="{:U('Sitemap/index')}"  enctype="multipart/form-data">
+        <div class="form_list_top">
+            <dl>
+                <dt> 数据来源：</dt>
+                <dd>
+                    <select multiple="multiple" size="15" name="catid[]" title="按住“Ctrl”或“Shift”键可以多选，按住“Ctrl”可取消选择">
+                        <volist name="list" id="vo">
+                            <option value="{$vo['id']}">
+                            <for start="2" end="$vo['count']">
+                            &nbsp;&nbsp;
+                            </for>
+                            <if condition="$vo['count'] gt 2">
+                            ├&nbsp;
+                            </if>
+                            {$vo['catname']}
+                            </option>
+                        </volist> 
+                    </select>
+                </dd>
+            </dl>
+            <dl>
+                <dt> 文件生成：</dt>
+                <dd>
+                    <input type="radio" name="sitemaptype" value="0" checked="true" />&nbsp;百度sitemap&nbsp;&nbsp;<input type="radio" name="sitemaptype" value="1" />&nbsp;Google Sitemap
+                </dd>
+            </dl>
+            <dl>
+                <dt> 优先权比值：</dt>
+                <dd>
+                    <select name="priority">                                
+                        <option value="1.0" >1.0</option>
+                        <option value="0.9" >0.9</option>
+                        <option value="0.8" >0.8</option>
+                        <option value="0.7" >0.7</option>
+                        <option value="0.6" >0.6</option>
+                        <option value="0.5" >0.5</option>
+                        <option value="0.4" >0.4</option>
+                        <option value="0.3" >0.3</option>
+                        <option value="0.2" >0.2</option>
+                        <option value="0.1" >0.1</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl>
+                <dt> 更新频率：</dt>
+                <dd>
+                    <select name="changefreq">
+                        <option value="always">经常</option>
+                        <option value="hourly">每小时</option> 
+                        <option value="daily" selected="selected">每天</option>
+                        <option value="weekly">每周</option> 
+                        <option value="monthly">每月</option>
+                        <option value="yearly">每年</option> 
+                    </select>
+                </dd>
+            </dl>
+        </div>
+        <div class="form_b">
+            <input type="submit" class="submit btn7" id="submit" value="生 成">
+        </div>
+        </form>
+    </div>
+</div>
+
+<include file="Public:footer" />

@@ -1,0 +1,36 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>权限组成员列表</h2>
+    </div>
+    <div class="list">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr class="nbg">
+                <th><input type="checkbox" id="check"></th>
+                <th>编号</th>
+                <th>用户名</th>
+                <th>最后登录ip</th>
+                <th>最后登录时间</th>
+                <th>E-mail</th>
+                <th>真实姓名</th>
+                <th>状态</th>
+            </tr>
+            <volist name="list2" id="vo">
+            <tr>
+                <td><input type="checkbox" name="key" value="{$vo.id}"></td>
+                <td>{$vo.id}</td>
+                <td>{$vo.account}</td>
+                <td>{$vo.last_login_ip} </td>
+                <td>{$vo.last_login_time|toDate='Y-m-d H:i:s'}</td>
+                <td>{$vo.email}</td>
+                <td>{$vo.nickname}</td>
+                <td>{$vostatus|getStatus}</td>
+            </tr>
+            </volist>
+            </tbody>
+        </table>
+        <div class="th" style="clear: both;">{$page}</div>
+    </div>
+</div>
+<include file="Public:footer" />

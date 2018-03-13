@@ -1,0 +1,50 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>添加推荐位置</h2>
+    </div>
+    <div class="form_list">
+        <form method='post' id="form1" name="form1" action="{:U('Recommend/insert')}">
+        <div class="form_list_top">
+
+        <dl>
+            <dt> 推荐位置：</dt>
+            <dd>
+                <input type="text" class="ipt4" name="recommendname">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 扣除积分：</dt>
+            <dd>
+
+                <input type="text" class="ipt2" name="intergral" value="0"><span class="fontcolor">填写一天扣除的积分数,应为大于或等于0的数字。</span> 
+            </dd>
+        </dl>
+        <dl>
+            <dt> 排序值：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="listorder" value="0">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 状态：</dt>
+            <dd>
+                <dd>
+                    <select name="status">
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                </dd>
+            </dd>
+        </dl>
+
+        </div>
+
+        <div class="form_b">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+</div>
+
+<include file="Public:footer" />

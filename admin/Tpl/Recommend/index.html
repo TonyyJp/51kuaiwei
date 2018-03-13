@@ -1,0 +1,43 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>推荐位置列表</h2>
+    </div>
+    <div class="operate">
+        <div class="fLeft"><input type="button" onclick="add()" class="submit btn5" value="添加推荐"></div>
+        <div class="fLeft"><input type="button" onclick="foreverdel()" class="submit btn5" value="删除选中"></div>
+        
+    </div>
+    <div class="list">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr class="nbg">
+                <th><input type="checkbox" id="check"></th>
+                <th>编号</th>
+                <th>推荐位置</th>
+                <th>扣除积分</th>
+                <th>排序值</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            <volist name="list" id="vo">
+            <tr>
+                <td><input type="checkbox" name="key" value="{$vo.id}"></td>
+                <td>{$vo.id}</td>
+                <td>{$vo.recommendname}</td>
+                <td>{$vo.intergral}</td>
+                <td>{$vo.listorder}</td>
+                <td><eq name="vo.status" value="1">启用<else/>禁用</eq></td>
+                <td align="center">
+                  
+                    <a href="{:U('Recommend/edit',array('id'=>$vo['id']))}">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{:U('Recommend/foreverdelete',array('id'=>$vo['id']))}" onclick="foreverdel({$vo['id']}); return false;">删除</a>
+                </td>
+            </tr>
+            </volist>
+            </tbody>
+        </table>
+        <div class="th" style="clear: both;">{$page}</div>
+    </div>
+</div>
+<include file="Public:footer" />

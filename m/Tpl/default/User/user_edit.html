@@ -1,0 +1,176 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link type="text/css" rel="stylesheet"
+	href="../mobile_file/css/style.css">
+<script src="../mobile_file/img/v.htm" charset="utf-8"></script>
+<script>window.jQuery || document.write('<script src="template/wap/../mobile_file/js/jquery-2.0.3.min.js"><\/script>')</script>
+<script src="../mobile_file/js/jquery-2.js"></script>
+<script type="text/javascript" src="../mobile_file/js/hammer.js"></script>
+<script type="text/javascript" src="../mobile_file/js/common.js"></script>
+<script src="../mobile_file/js/jquery.js" type="text/javascript"></script>
+<script>
+          $(document).ready(function(){
+			  $(".tab").each(function(i) {
+				  $(this).click(function(){
+					  $(".tab").removeClass("cur");
+					  $(this).addClass("cur");
+					  $("#cont .pubcon").hide();
+					  $("#cont .pubcon").eq(i).show();
+					  });
+            });
+	})
+    </script>
+<title>修改个人信息</title>
+</head>
+<body>
+<header class="fixed-top head">
+<div class="fixed">
+<div class="headlf fl"><a href="index.php"><img
+	src="../mobile_file/img/logo.png"></a></div>
+<div class="headrg fr"><a
+	href="index.php?m=Index&a=search"><img
+	src="../mobile_file/img/search.png"></a><a class="headpub"
+	href="javascript:;"><img src="../mobile_file/img/fenl.png"></a></div>
+</div>
+<div style="-moz-user-select: none;" class="menu-fn menu hide-me" id="more-fn">
+    <include file="Public:nav" />
+</div>
+</header>
+<div class="wrap-page">
+<div class="myself">
+<div class="myhead fl"><img src="../mobile_file/img/avatar.jpg"></div>
+<div class="myinfo fl">
+<ul>
+	<li><a href="index.php?m=User&a=user_edit">修改个人信息</a></li>
+	<li><a href="index.php?m=User&a=user_pass">修改密码</a></li>
+	<li><a href="index.php?m=Index&a=weixin_add">发布二维码</a></li>
+</ul>
+</div>
+<div class="my_off"><a
+	href="index.php?m=User&a=login_out"><img
+	src="../mobile_file/img/off.gif">退出</a></div>
+<div class="clr"></div>
+</div>
+
+<div class="my_nav">
+    <ul>
+        <li class="<?php if($_GET['id'] == 44) echo 'cur';?>"><a href="index.php?m=User&a=user_weixinqun&i=44">已发布的微信群</a></li>
+        <li class="<?php if($_GET['id'] == 48) echo 'cur';?>"><a href="index.php?m=User&a=user_weixinqun&i=48">已发布的个人微信</a></li>
+        <li class="<?php if($_GET['id'] == 47) echo 'cur';?>"><a href="index.php?m=User&a=user_weixinqun&i=47">已发布的公众号</a></li>
+        <div class="clr"></div>
+    </ul>
+</div>
+<form action="index.php?m=User&a=edit" method="post">
+<div class="release_all">
+<ul>
+	<li><span>昵称：</span><input name="nickname" id="name" class="i1" value="{$user['nickname']}" type="text"></li>
+	<li><span>个人微信号：</span><input name="weixin" id="wxh" class="i1" value="{$user['wxaccount']}" type="text"></li>
+	<li><span>性别：</span><input name="gender" value="1" <if condition="$user['gender'] eq 1">checked</if> type="radio"> 男 <input name="gender" value="2" <if condition="$user['gender'] eq 2">checked</if> type="radio"> 女</li>
+	<li><span>生日：</span>
+		<select class="s1" name="y">
+		<volist name="y" id="ydata">
+		<option value="{$ydata['val']}" {$ydata['css']}>{$ydata['val']}</option>
+		</volist>
+		</select> 
+		<select class="s1" name="m">
+		<volist name="m" id="mdata">
+		<option value="{$mdata['val']}" {$mdata['css']}>{$mdata['val']}</option>
+		</volist>
+		</select> 
+		<select class="s1" name="d">
+		<volist name="d" id="ddata">
+		<option value="{$ddata['val']}" {$ddata['css']}>{$ddata['val']}</option>
+		</volist>
+		</select>
+		<script type="text/javascript">
+		$("select[name='m']").change(function(){
+			$.ajax({
+				type:"POST",
+				url:"index.php?m=User&a=show_date",
+				data:{m:$("select[name='m']").val()},
+				success:function(data){
+					alert(1);
+					$("select[name='d']").empty();
+					console.info(data);
+					$(data).each(i,val){
+						$("select[name='d']").append("<option value='"+val+"'>"+val+"</option>");
+					}
+				}
+			});
+		});
+		</script>
+	</li>
+
+	<li><span>所在地：</span>
+		<select class="s1" name="province" id="province">
+		<volist name="province" id="pdata">
+		<option value="{$pdata['id']}" {$pdata['css']}>{$pdata['area_name']}</option>
+		</volist>
+		</select> 
+		<select class="s1" name="ctiy" id="city">
+		<volist name="ctiy" id="cdata">
+		<option value="{$cdata['id']}" {$cdata['css']}>{$cdata['area_name']}</option>
+		</volist>
+		</select> 
+	</li>
+	<li><input type="hidden" name="id" value="{$user['id']}" /><input name="action" value="save" type="hidden"><input value="提交" class="tijiao" type="submit"></li>
+</ul>
+</div>
+</form>
+</div>
+
+<footer class="fixed-bottom foot">
+<div class="foot_return"><span><a class="home"
+	href="index.php?m=User">个人中心</a><a
+	class="srh" href="index.php?m=User&a=login_out">退出</a></span></div>
+     <div class="foot_txt">
+	<include file="Public:footer" />
+	
+	</div>
+</footer>
+<iframe style="display: none; width: 1px; height: 1px;"
+	src="../mobile_file/img/mp-cdn.htm"></iframe>
+<script>$(document).ready(function(){
+    $(".btimg").lazyload();
+})</script>
+
+<script type="text/javascript">
+    $(function(){
+        $("#province").change(function(){
+
+            var ajaxurl="/ajax-getArea.html";
+            var areaId=this.value;
+            var areaType='city';
+            $.post(ajaxurl,{'areaId':areaId},function(data){
+
+                if(areaType==='city'){
+                    $('#'+areaType).html('<option value="-1">城市</option>');
+
+                    $('#district').html('<option value="-1">镇/区</option>');
+                }else if(areaType==='district'){
+                    $('#'+areaType).html('<option value="-1">镇/区</option>');
+                }
+                if(areaType!=='null'){
+                    $.each(data,function(no,items){
+                        $('#'+areaType).append('<option value="'+items.id+'">'+items.area_name+'</option>');
+                    });
+                }
+            });
+
+        });
+
+    });
+
+</script>
+
+
+
+</body>
+</html>

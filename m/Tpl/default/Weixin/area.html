@@ -1,0 +1,18 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<div data-role="content">              
+    <volist name="arealist" id="vo">
+        <div data-role="collapsible">
+        <h3>{$vo['area_name']}</h3>
+        <p>
+        <a href="{:U('Weixin/index',array('catid'=>$data['id'],'province'=>$vo['id']))}" data-role="button" data-theme="a" data-inline="true" >{$vo['area_name']}</a>
+        <notempty name="vo.subarealist">    
+        <volist name="vo.subarealist" id="subvo">
+            <a href="{:U('Weixin/index',array('catid'=>$data['id'],'city'=>$subvo['id']))}" data-role="button" data-inline="true" >{$subvo['area_name']}</a>
+        </volist>
+        </notempty>
+        </p> 
+        </div>
+    </volist>
+</div>   
+<include file="Public:bottom" />

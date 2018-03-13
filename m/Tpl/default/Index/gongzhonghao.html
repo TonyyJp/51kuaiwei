@@ -1,0 +1,133 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link type="text/css" rel="stylesheet"
+	href="../mobile_file/css/style.css">
+<script src="../mobile_file/img/v.htm" charset="utf-8"></script>
+<script>window.jQuery || document.write('<script src="template/wap/../mobile_file/js/jquery-2.0.3.min.js"><\/script>')</script>
+<script src="../mobile_file/js/jquery-2.js"></script>
+<script type="text/javascript" src="../mobile_file/js/hammer.js"></script>
+<script type="text/javascript" src="../mobile_file/js/common.js"></script>
+<script src="../mobile_file/js/jquery.js" type="text/javascript"></script>
+<script>
+          $(document).ready(function(){
+			  $(".tab").each(function(i) {
+				  $(this).click(function(){
+					  $(".tab").removeClass("cur");
+					  $(this).addClass("cur");
+					  $("#cont .pubcon").hide();
+					  $("#cont .pubcon").eq(i).show();
+					  });
+            });
+	})
+    </script>
+<include file="Public:header" />
+</head>
+<body>
+<header class="fixed-top head">
+<div class="fixed">
+<div class="headlf fl"><a href="index.php"><img
+	src="../mobile_file/img/logo.png"></a></div>
+<div class="headrg fr"><a
+	href="index.php?m=Index&a=search"><img
+	src="../mobile_file/img/search.png"></a><a class="headpub"
+	href="javascript:;"><img src="../mobile_file/img/fenl.png"></a></div>
+</div>
+<div style="-moz-user-select: none;" class="menu-fn menu hide-me" id="more-fn">
+    <include file="Public:nav" />
+</div>
+</header>
+<div class="wrap-page">
+<div class="con_nav">
+<ul>
+	<li>
+	<select name="Source"
+		onChange="window.location.href=this.options[selectedIndex].value">
+		<option value="index.php?m=Index&a=gongzhonghao<?php if($_GET['tid'])echo "&tid=".$_GET['tid'];?>" selected="selected">地区不限</option>
+		<volist name='areas' id='area'>
+			<option value="index.php?m=Index&a=gongzhonghao&aid={$area['id']}<?php if($_GET['tid'])echo "&tid=".$_GET['tid'];?>" {$area['css']}>{$area['area_name']}</option>
+		</volist>
+	</select>
+	<div class="xiala"></div>
+	</li>
+	<li>
+	<select name="Source" onChange="window.location.href=this.options[selectedIndex].value">
+		<option value="index.php?m=Index&a=gongzhonghao<?php if($_GET['aid'])echo "&aid=".$_GET['aid'];?>">类型不限</option>
+		<volist name="type_list" id="tl">
+		<option value="index.php?m=Index&a=gongzhonghao&tid={$tl['id']}<?php if($_GET['aid'])echo "&aid=".$_GET['aid'];?>"" {$tl['css']}>{$tl['catname']}</option>
+		</volist>
+	</select>
+	<div class="xiala"></div>
+	</li>
+	
+	<li style="border-right: none;"><select name="Source"
+		onChange="window.location.href=this.options[selectedIndex].value">
+		<option value="index.php?m=Index&a=weixinqun<?php if($_GET['aid'])echo "&aid=".$_GET['aid'];if($_GET['tid'])echo "&tid=".$_GET['tid'];?>" selected="selected">时间不限</option>
+		<volist name="time" id="time">
+		<option value="index.php?m=Index&a=weixinqun&time={$time['id']}<?php if($_GET['aid'])echo "&aid=".$_GET['aid'];if($_GET['tid'])echo "&tid=".$_GET['tid'];?>" {$time['css']}>{$time['name']}</option>
+		</volist>
+	</select>
+	<div class="xiala"></div>
+	</li>
+	<div class="clr"></div>
+</ul>
+</div>
+<div class="guangao">
+<ul>
+	<volist name="advert" id="adv">
+	<li><a href="{$adv['adcontent']}" title="{$adv['adname']}">{$adv['adname']}</a></li>
+	</volist>
+	<div class="clr"></div>
+</ul>
+</div>
+<div class="dq_cont">
+<ul>
+	<volist name="today_hao" id="tq">
+	<li>
+		<a href="index.php?m=Index&a=archives&id={$tq['id']}">
+		<img class="btimg" src="{$tq['logo']}" alt="{$tq['title']}" title="{$tq['title']}"><br>
+		<span>{$tq['qiangwei_time']}</span>
+		<p>{$tq['title']}</p>
+		</a>
+	</li>
+	</volist>
+	<div class="clr"></div>
+</ul>
+</div>
+<div class="clr"></div>
+</div>
+
+<footer class="fixed-bottom foot">
+<div class="foot_return">
+	<span>
+		<?php
+		if($_SESSION['user']){
+			echo '<a class="home" href="' . U('User/index') . '">个人中心</a>';
+			echo '<a class="srh" href="' . U('User/login_out') . '">退出</a>';
+		}else{
+			echo '<a class="home" href="' . U('User/user_login') . '">登录</a>';
+			echo '<a class="srh" href="' . U('User/user_reg') . '">注册</a>';
+		}
+		?>
+	</span>
+</div>
+   <div class="foot_txt">
+	<include file="Public:footer" />
+	
+	</div>
+</footer>
+<iframe style="display: none; width: 1px; height: 1px;"
+	src="../mobile_file/img/mp-cdn.htm"></iframe>
+<script>$(document).ready(function(){
+    $(".btimg").lazyload();
+})</script>
+
+
+</body>
+</html>

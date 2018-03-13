@@ -1,0 +1,42 @@
+<include file="Public:header" />
+
+<div class="main">
+    <div class="box_tit">
+        <h2>修改搜索词</h2>
+    </div>
+    <div class="form_list">
+        <form method='post' id="form1" name="form1" action="{:U('Search/update')}"  enctype="multipart/form-data">
+        <div class="form_list_top">
+        <dl>
+            <dt> 关键词：</dt>
+            <dd>
+                <input type="text" class="ipt4" name="search" value="{$vo.search}">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 搜索量：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="hits" value="{$vo.hits}">
+            </dd>
+        </dl>
+        
+        <dl>
+            <dt> 状态：</dt>
+            <dd>
+                 <select name="status">
+                    <option value="1" {$vo['status']==1 ? 'selected="selected"':'' }>显示</option>
+                    <option value="0" {$vo['status']==0 ? 'selected="selected"':'' }>不显示</option>
+                </select>
+            </dd>
+        </dl>
+        </div>
+
+        <div class="form_b">
+            <input type="hidden" name="id" value="{$vo.id}">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+</div>
+
+<include file="Public:footer" />

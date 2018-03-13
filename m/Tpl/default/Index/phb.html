@@ -1,0 +1,133 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link type="text/css" rel="stylesheet"
+	href="../mobile_file/css/style.css">
+<script src="../mobile_file/img/v.htm" charset="utf-8"></script>
+<script>window.jQuery || document.write('<script src="template/wap/../mobile_file/js/jquery-2.0.3.min.js"><\/script>')</script>
+<script src="../mobile_file/js/jquery-2.js"></script>
+<script type="text/javascript" src="../mobile_file/js/hammer.js"></script>
+<script type="text/javascript" src="../mobile_file/js/common.js"></script>
+<script src="../mobile_file/js/jquery.js" type="text/javascript"></script>
+<script>
+          $(document).ready(function(){
+			  $(".tab").each(function(i) {
+				  $(this).click(function(){
+					  $(".tab").removeClass("cur");
+					  $(this).addClass("cur");
+					  $("#cont .pubcon").hide();
+					  $("#cont .pubcon").eq(i).show();
+					  });
+            });
+	})
+    </script>
+<include file="Public:header" />
+</head>
+<body>
+<header class="fixed-top head">
+<div class="fixed">
+<div class="headlf fl"><a href="index.php"><img
+	src="../mobile_file/img/logo.png"></a></div>
+<div class="headrg fr"><a
+	href="index.php?m=Index&a=search"><img
+	src="../mobile_file/img/search.png"></a><a class="headpub"
+	href="javascript:;"><img src="../mobile_file/img/fenl.png"></a></div>
+</div>
+<div style="-moz-user-select: none;" class="menu-fn menu hide-me" id="more-fn">
+    <include file="Public:nav" />
+</div>
+</header>
+    <div class="wrap-page">
+        <div class="nav">
+        	<ul>
+            	<li class="<?php if($_GET['id'] == 44)echo 'cur';?>"><a href="index.php?m=Index&a=phb&id=44">微信群</a></li>
+                <li class="<?php if($_GET['id'] == 47)echo 'cur';?>"><a href="index.php?m=Index&a=phb&id=47">公众号</a></li>
+                <li class="<?php if($_GET['id'] == 48)echo 'cur';?>"><a href="index.php?m=Index&a=phb&id=48">个人微信</a></li>
+                <li class="<?php if($_GET['id'] == 1)echo 'cur';?>"><a href="index.php?m=Index&a=phb&id=1">微商货源</a></li>
+                <div class="clr"></div>
+            </ul>
+        </div>
+        <div class="ph_nav">
+        	<ul>
+                <li><select name="Source" onChange="window.location.href=this.options[selectedIndex].value">
+                      <option value="index.php?m=Index&a=phb<?php echo "&id=" . $_GET['id'];if($_GET['aid'])echo "&aid=".$_GET['aid'];if($_GET['time'])echo "&time=".$_GET['time'];?>">类型不限</option>
+		<volist name="type_list" id="tl">
+		<option value="index.php?m=Index&a=phb&tid={$tl['id']}<?php echo "&id=" . $_GET['id'];if($_GET['aid'])echo "&aid=".$_GET['aid'];if($_GET['time'])echo "&time=".$_GET['time'];?>" {$tl['css']}>{$tl['catname']}</option>
+		</volist>
+                      </select>
+                  <div class="xiala"></div>
+                </li>
+                <!--<li>
+                   <select name="Source" onchange="window.location.href=this.options[selectedIndex].value">
+                     <option value="index.php?m=Index&a=phb&catid=<?php echo $_GET['tid'];?>">排序不限</option>
+                                            <option value="/phb.html?da=7&amp;wx=0&amp;or=2">人气最高</option>
+                                          <option value="/phb.html?da=7&amp;wx=0&amp;or=7" selected="selected">点赞最高</option>
+                                      </select> 
+                  <div class="xiala"></div>
+            	</li>-->
+                <li style="border-right:none;"><select name="Source" onChange="window.location.href=this.options[selectedIndex].value">
+                   <option value="index.php?m=Index&a=phb<?php echo "&id=" . $_GET['id'];if($_GET['aid'])echo "&aid=".$_GET['aid'];if($_GET['tid'])echo "&tid=".$_GET['tid'];?>" selected="selected">时间不限</option>
+		<volist name="time" id="time">
+		<option value="index.php?m=Index&a=phb&time={$time['id']}<?php echo "&id=" . $_GET['id'];if($_GET['aid'])echo "&aid=".$_GET['aid'];if($_GET['tid'])echo "&tid=".$_GET['tid'];?>" {$time['css']}>{$time['name']}</option>
+		</volist>
+                                      </select>
+                  <div class="xiala"></div>
+                </li>
+                <div class="clr"></div>
+            </ul>
+        </div>
+        <div class="ph_cont">
+        	<ul>
+        	<volist name="today_qun" id="vo">
+          <li>
+                	<span><a href="index.php?m=Index&a=archives&id={$vo['id']}"><img style="display: block;" class="btimg" src="{$vo['logo']}" alt="{$vo.pubaccount}" title="{$vo.pubaccount}"></a></span>
+                    <p class="fl">{$vo.pubaccount|msubstr=0,6}<br>微信群号:{$vo['wxaccount']}<br>关注：<font>{$vo['hits']}</font></p>
+                </li>
+        </volist>
+                             <div class="clr"></div>
+            </ul>
+        </div>
+        <div class="fenye">{$page}</div>
+        <div class="clr"></div>
+	</div>
+	<footer class="fixed-bottom foot">
+<div class="foot_return">
+	<span>
+		<?php
+		if($_SESSION['user']){
+			echo '<a class="home" href="' . U('User/index') . '">个人中心</a>';
+			echo '<a class="srh" href="' . U('User/login_out') . '">退出</a>';
+		}else{
+			echo '<a class="home" href="' . U('User/user_login') . '">登录</a>';
+			echo '<a class="srh" href="' . U('User/user_reg') . '">注册</a>';
+		}
+		?>
+	</span>
+</div>
+         <div class="foot_txt">
+	<include file="Public:footer" />
+	
+	</div>
+    </footer>
+	<script>$(document).ready(function(){
+    $(".btimg").lazyload();
+})</script>
+<script>
+function praise(id,tid,ztype){
+    var urls="/user-praise.html";
+    var zid="#znum"+id;
+    var cid="#cnum"+id;
+    var znum=parseInt($(zid).attr('znum'));
+    var cnum=parseInt($(cid).attr('cnum'));
+    $.ajax({type: "post",dataType: "json",url: urls,data: "json=1&id="+id+"&cid="+tid+"&ztype="+ztype,success: function(result){if(result.type){if(ztype==1){znum=znum+1;$(zid).attr('znum',znum);$(zid).html(znum);}else{cnum=cnum-1;$(cid).attr('cnum',cnum);$(cid).html(cnum);}alert(result.msg);}else{alert(result.msg);}}});
+}
+</script>
+
+
+</body></html>

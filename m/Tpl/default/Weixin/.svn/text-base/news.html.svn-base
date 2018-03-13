@@ -1,0 +1,17 @@
+<include file="Public:top" />
+<include file="Public:header" />
+<div data-role="content">              
+    <ul data-role="listview">
+        <volist name="list" id="vo">
+            <li>
+                <a href="{:U('Weixin/show',array('id'=>$vo['id']))}">
+                    <img src="__ROOT__/Uploads/{$vo['logo']}" style="border: 1px solid #008200;" class="imgthumb" />
+                    <h3>{$vo['pubaccount']}</h3>
+                    <p>{$vo.hits}&nbsp;人关注&nbsp;&nbsp;<img src="../Public/images/xx{$vo.xingji}.jpg" />&nbsp;&nbsp;{$vo.content|strip_tags|msubstr=0,20}</p>
+                </a>
+            </li>
+        </volist>
+        {$downPage}
+    </ul>
+</div>   
+<include file="Public:bottom" />

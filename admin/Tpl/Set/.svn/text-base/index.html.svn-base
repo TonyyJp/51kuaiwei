@@ -1,0 +1,141 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>系统设置</h2>
+    </div>
+    <div class="form_list">
+        <form method='post' id="form1" name="form1" action="{:U('Set/save')}"  enctype="multipart/form-data">
+        
+        <div class="form_list_top">
+        <dl>
+            <dt> 站点名称：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="SITE_NAME" value="{$user_config.SITE_NAME}"><strong class="red">*</strong>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 站点标题：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="SITE_TITLE" value="{$user_config.SITE_TITLE}"><span class="fontcolor">站点首页title标签的设置</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 站点关键词：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="SITE_KEYWORDS" value="{$user_config.SITE_KEYWORDS}"><span class="fontcolor">站点首页meta标签 keywords站点关键词的设置</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 站点描述：</dt>
+            <dd>
+                <textarea name="SITE_DESCRIPTION" style="width:400px; height:60px; padding-left: 3px;">{$user_config.SITE_DESCRIPTION}</textarea><span class="fontcolor">站点首页meta标签 description站点描述的设置</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 站点logo：</dt>
+            <dd class="img">
+                <notempty name="set.logo">
+                <img src="__ROOT__/Uploads/{$set.logo}" name="logo" />
+                <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除logo吗？">删除logo</a>
+                <else/>
+                <input type="file" class="thumb" name="logo" />
+                </notempty>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 是否开启评论功能：</dt>
+            <dd>
+                <input type="radio" name="ISCOMMENT" value="1" <eq name="user_config.ISCOMMENT" value="1">checked="checked"</eq> />&nbsp;开启&nbsp;&nbsp;<input type="radio" name="ISCOMMENT" value="0" <eq name="user_config.ISCOMMENT" value="0">checked="checked"</eq> />&nbsp;关闭<span class="fontcolor">如果选择开启，会员将可以对网站内容进行评论,否则，不能评论。</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 评论管理：</dt>
+            <dd>
+                
+                <input type="radio" name="COMMENTTYPE" value="1" <eq name="user_config.COMMENTTYPE" value="1">checked="checked"</eq> />&nbsp;使用系统自带评论功能&nbsp;&nbsp;<input type="radio" name="COMMENTTYPE" value="2" <eq name="user_config.COMMENTTYPE" value="2">checked="checked"</eq> />&nbsp;使用多说评论管理系统<span class="fontcolor">如果选择多说评论管理系统,需要在系统扩展功能设置多说功能代码</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 评论审核：</dt>
+            <dd>
+                <input type="radio" name="comment" value="1" <eq name="set.comment" value="1">checked="checked"</eq> />&nbsp;审核新评论&nbsp;&nbsp;<input type="radio" name="comment" value="0" <eq name="set.comment" value="0">checked="checked"</eq> />&nbsp;无需审核新评论
+            </dd>
+        </dl>
+        <dl>
+            <dt> 游客是否可以提交公号：</dt>
+            <dd>
+                <input type="radio" name="ISADDACCOUNT" value="1" <eq name="user_config.ISADDACCOUNT" value="1">checked="checked"</eq> />&nbsp;开启&nbsp;&nbsp;<input type="radio" name="ISADDACCOUNT" value="0" <eq name="user_config.ISADDACCOUNT" value="0">checked="checked"</eq> />&nbsp;关闭<span class="fontcolor">如果选择开启，游客将可以提交微信公号,否则，必须登录会员中心才能提交。</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 一篇促销活动消费积分数：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="XFINTERGRAL" value="{$user_config.XFINTERGRAL}"><span class="fontcolor">会员发布一篇促销活动所消费的积分数</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 1元人民币购买积分数量：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="RMB_CHANGE_INTERGRAL" value="{$user_config.RMB_CHANGE_INTERGRAL}"><span class="fontcolor">请输入1元人民币购买积分数量</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 模板设置：</dt>
+            <dd>
+                <select name="DEFAULT_THEME">                                
+                    <volist name="templateList" id="vo">
+                        <option value="{$key}" {$key==$user_config['DEFAULT_THEME'] ? 'selected="selected"':''}>{$vo}</option>
+                    </volist>
+                </select>
+            </dd>
+        </dl>
+        
+        
+        <dl>
+            <dt> 后台最大登录失败次数：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="errorcount" value="{$set.errorcount}"><span class="fontcolor">后台最大登录失败次数</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 后台登录失败超次后间隔：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="errorinterval" value="{$set.errorinterval}"><span class="fontcolor">后台登录超过设置的最大失败超次后需要等待间隔（秒）</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 留言间隔：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="messageinterval" value="{$set.messageinterval}"><span class="fontcolor">用户留言间隔（秒）</span>
+            </dd>
+        </dl>
+      
+        </div>
+        <div class="form_b">
+            <input type="hidden" name="id" value="{$set.id}">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+
+   //删除logo
+   function foreverdelthumb(cur){
+       var nodename=$(cur).prev().attr('name');
+       var url="{:U('Set/delfile',array('id'=>$set['id'],'file'=>'"+nodename+"'))}";
+        //创建删除节点
+        $.get(url,function(){
+            //插入新节点
+            var html='<dd>\r\n<input type="file" class="thumb" name="'+nodename+'" />\r\n</dd>';
+            $(cur).parent().after(html);
+
+            //移除当前节点
+            $(cur).parent().remove();
+        });
+    }
+</script>
+<include file="Public:footer" />

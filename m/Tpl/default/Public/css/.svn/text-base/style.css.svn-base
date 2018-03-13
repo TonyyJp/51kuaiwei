@@ -1,0 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+
+img.imgthumb{
+    border: 1px solid #008200; padding: 4px; width: 60px; height:60px; margin: 5px;
+}

@@ -1,0 +1,17 @@
+<include file="Public:top" />
+    <include file="Public:header" />
+            <div data-role="content">
+                <ul data-role="listview">
+                    <volist name="list" id="vo">
+                    	<li>
+                            <a href="{:U('Article/show',array('id'=>$vo['id']))}">
+                                <img src="__ROOT__/Uploads{$vo.thumb}" style="border: 1px solid #008200;" class="imgthumb" />
+                                <h3>{$vo.title}</h3>
+                                <p>{$vo.create_time|toDate='Y-m-d'}</p>
+                            </a>
+                        </li>
+                    </volist>
+                    {$downPage}
+		</ul>
+            </div> 
+<include file="Public:bottom" />

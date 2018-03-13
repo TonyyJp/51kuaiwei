@@ -1,0 +1,3 @@
+<div data-role="header" data-position="fixed">
+    <a href="__APP__" data-rel="back">后退</a><h1>{$position[0]['catname']}</h1><a href="__APP__">首页</a>
+</div>

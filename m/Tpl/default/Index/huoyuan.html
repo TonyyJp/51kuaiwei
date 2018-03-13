@@ -1,0 +1,125 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link type="text/css" rel="stylesheet"
+	href="../mobile_file/css/style.css">
+<script src="../mobile_file/img/v.htm" charset="utf-8"></script>
+<script>window.jQuery || document.write('<script src="template/wap/../mobile_file/js/jquery-2.0.3.min.js"><\/script>')</script>
+<script src="../mobile_file/js/jquery-2.js"></script>
+<script type="text/javascript" src="../mobile_file/js/hammer.js"></script>
+<script type="text/javascript" src="../mobile_file/js/common.js"></script>
+<script src="../mobile_file/js/jquery.js" type="text/javascript"></script>
+<script>
+          $(document).ready(function(){
+			  $(".tab").each(function(i) {
+				  $(this).click(function(){
+					  $(".tab").removeClass("cur");
+					  $(this).addClass("cur");
+					  $("#cont .pubcon").hide();
+					  $("#cont .pubcon").eq(i).show();
+					  });
+            });
+	})
+    </script>
+<title>微商货源 - 微信群大全 - wx131.com</title>
+<meta name="keywords" content="微商货源,微信群大全,精品微信群二维码">
+<meta name="description" content="微信群平台汇聚全国各地区各类型的微信群二维码，供大家拓展粉丝等需求。">
+</head>
+<body>
+<header class="fixed-top head">
+<div class="fixed">
+<div class="headlf fl"><a href="index.php"><img
+	src="../mobile_file/img/logo.png"></a></div>
+<div class="headrg fr"><a
+	href="index.php?m=Index&a=search"><img
+	src="../mobile_file/img/search.png"></a><a class="headpub"
+	href="javascript:;"><img src="../mobile_file/img/fenl.png"></a></div>
+</div>
+<div style="-moz-user-select: none;" class="menu-fn menu hide-me"
+	id="more-fn">
+    <include file="Public:nav" />
+</div>
+</header>
+
+<div class="wrap-page">
+<div class="hy_nav">
+<ul>
+	<li class="cur"><a href="index.php?m=Index&a=huoyuan">所有</a></li>
+	<li><a href="index.php?m=Index&a=huoyuan&cid={$type_list[0]['id']}">{$type_list[0]['catname']}</a></li>
+	<li><a href="index.php?m=Index&a=huoyuan&cid={$type_list[1]['id']}">{$type_list[1]['catname']}</a></li>
+	<li><a href="index.php?m=Index&a=huoyuan&cid={$type_list[2]['id']}">{$type_list[2]['catname']}</a></li>
+	<li style="border-right: none;">
+		<select name="Source" onChange="window.location.href=this.options[selectedIndex].value">
+			<option value="index.php?m=Index&a=huoyuan">不限</option>
+			<volist name="type_list" id="tl">
+			<option value="index.php?m=Index&a=huoyuan&cid={$tl['id']}" {$tl['css']}>{$tl['catname']}</option>
+			</volist>
+	</select>
+	<div class="xiala"></div>
+	</li>
+	<div class="clr"></div>
+</ul>
+</div>
+<div class="hy_cont">
+<ul>
+<volist name="weixin_huoyuan" id="wh">
+	<li>
+	<div class="hy_contli">
+	<a href="index.php?m=Index&a=archives&id={$wh['id']}" title="{$wh['title']}">
+	<img style="display: inline;" class="btimg"src="{$wh['logo']}" alt="{$wh['title']}"><br>
+	<span>{$wh['qiangwei_time']}</span>
+	<p>货源名称：{$wh['title']}<br>
+	微信号：<font>{$wh['membername']}</font></p>
+	</a></div>
+	</li>
+</volist>
+	<div class="clr"></div>
+</ul>
+
+
+ <div class="fenye">
+  		<?php echo $page;?>
+        <!-- <a href="">首页</a> 
+        <a href="">上一页</a>
+         1/2380 
+         <a href="">下一页</a> 
+         <a href="">末页</a> -->
+   </div>
+</div>
+<div class="clr"></div>
+</div>
+
+<footer class="fixed-bottom foot">
+<div class="foot_return">
+	<span>
+		<?php
+		if($_SESSION['user']){
+			echo '<a class="home" href="' . U('User/index') . '">个人中心</a>';
+			echo '<a class="srh" href="' . U('User/login_out') . '">退出</a>';
+		}else{
+			echo '<a class="home" href="' . U('User/user_login') . '">登录</a>';
+			echo '<a class="srh" href="' . U('User/user_reg') . '">注册</a>';
+		}
+		?>
+	</span>
+</div>
+   <div class="foot_txt">
+	<include file="Public:footer" />
+	
+	</div>
+</footer>
+<iframe style="display: none; width: 1px; height: 1px;"
+	src="hy_files/mp-cdn.htm"></iframe>
+<script>$(document).ready(function(){
+    $(".btimg").lazyload();
+})</script>
+
+
+</body>
+</html>

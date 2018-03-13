@@ -1,0 +1,75 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>推荐记录</h2>
+    </div>
+    <div class="operate">
+     
+        <div class="fLeft"><input type="button" onclick="tjdelete();" class="submit btn5" value="删除选中"></div>
+   
+        <div class="fLeft">
+            <form method="post" action="{:U('Weixin/tjlist')}">
+                <select name="cxtj"  style="margin-left: 20px;">
+                    <option value="1" <eq name="cxtj" value="1">selected="selected"</eq>>公众号</option>
+                    <option value="2" <eq name="cxtj" value="2">selected="selected"</eq>>会员名</option>
+                </select>
+                <input type="text" name="name" class="ipt3">
+                <select name="tjposition">
+                    <option value="-2" <eq name="tjposition" value="-2">selected="selected"</eq>>全部</option>
+                    <volist name="tjposition" id="tjp">
+                        <option value="{$tjp['id']}" <eq name="tjzt" value="$tjp.id">selected="selected"</eq>>{$tjp.recommendname}</option>
+                    </volist>
+                </select>
+                <input type="submit" class="submit btn5" value="查  询">
+            </form>
+        </div>
+       
+    </div>
+    <div class="list">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr class="nbg">
+                <th><input type="checkbox" id="check"></th>
+                <th>编号</th>
+                <th>公众账号</th>
+                <th>推荐位置</th>
+                <th>时间限制</th>
+                <th>消费积分</th>
+                <th>会员名</th>
+                <th>操作</th>
+            </tr>
+            <volist name="list" id="vo">
+            <tr>
+                <td><input type="checkbox" name="key" value="{$vo.id}"></td>
+                <td>{$vo.id}</td>
+                <td>{$vo.pubaccount}</td>
+                <td>{$vo.recommendid|getRecommendName}</td>
+                <td>
+                    <if condition="$vo.timelimit eq 0">
+                        永久
+                    <else />
+                        {$vo.starttime|toDate="Y-m-d"}到{$vo.endtime|toDate="Y-m-d"}
+                    </if>
+                </td>
+                <td>{$vo.intergral}</td>
+                <td>{$vo.membername}</td>
+                
+                
+                <td>
+                    <eq name="vo.status" value="0">
+                    <a href="{:U('Weixin/tjcheckPass',array('id'=>$vo['id']))}">启用</a>&nbsp;&nbsp;
+                    </eq>
+                    <eq name="vo.status" value="1">
+                    <a href="{:U('Weixin/tjforbid',array('id'=>$vo['id']))}">禁用</a>&nbsp;&nbsp;
+                    </eq>
+                    
+                    <a href="{:U('Weixin/tjdelete',array('id'=>$vo['id']))}" onclick="tjdelete({$vo['id']}); return false;">删除</a>
+                </td>
+            </tr>
+            </volist>
+            </tbody>
+        </table>
+        <div class="th" style="clear: both;">{$page}</div>
+    </div>
+</div>
+<include file="Public:footer" />

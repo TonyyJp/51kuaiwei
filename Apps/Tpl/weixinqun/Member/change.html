@@ -1,0 +1,54 @@
+<include file="Member:header" />
+<!-- 内容 START -->
+<div class="center-content mt20">
+    <div class="wrap w1000">
+        <include file="Member:left" />
+        <div class="right-content fRight">
+            <h2>积分兑换</h2>
+             <div class="mainbody mt10">
+                 <form method='post' id="form1" name="form1" action="{:U('Member/payspend')}">
+                    <div>
+                        <label style="width: 80px;">账户余额：</label>
+                        <span class="star" style="font-size: 22px;font-family: Georgia,Arial;font-weight: 700;}">{$memberdata.amount}</span><span>元，</span><span class="star" style="font-size: 14px;font-family: Georgia,Arial;font-weight: 700;}">{$memberdata.intergral}</span><span>点</span>
+                    </div>
+                    <div>
+                        <label style="width: 80px;">支出：</label>
+                        <input type="text" name="value" class="ipt2" id="change"><span>元&nbsp;可以兑换积分数：</span><span class="star" id="intergral">0</span><span>点</span>
+                        <span class="star" id="alert">*</span>
+                    </div>
+                    <div>
+                        <label style="width: 80px;">&nbsp;</label>
+                        <input type="submit" id="submit" value="提 交" class="submit">
+                    </div>
+                </form>
+             </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+ 
+ $(function(){
+    $('#intergral').html($("#change").val()*10);
+    $('#change').keyup(function(){
+        $(this).val($(this).val().replace(/[^\d]/g,''));
+        $("#intergral").html($("#change").val()*{$rmb_change_intergral});
+        if({$memberdata.amount} < $(this).val()) {
+                $("#alert").html('您的余额不足');
+        } else {
+                $("#alert").html('');
+        }
+    });
+    $('#change').blur(function(){
+        $(this).val($(this).val().replace(/[^\d]/g,''));
+        $("#intergral").html($("#change").val()*{$rmb_change_intergral});
+        if({$memberdata.amount} < $(this).val()) {
+                $("#alert").html('您的余额不足');
+        } else {
+                $("#alert").html('');
+        }
+    });
+ });
+        
+</script>
+
+<include file="Member:footer" />

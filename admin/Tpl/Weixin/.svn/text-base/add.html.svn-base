@@ -1,0 +1,224 @@
+<include file="Public:header" />
+<div class="main">
+            <div class="box_tit">
+                <h2>添加内容</h2>
+            </div>
+            <div class="form_list w12">
+                <include file="Public:notice" />
+                <form method='post' id="form1" name="form1" action="{:U('Weixin/insert')}"  enctype="multipart/form-data">
+                <div class="listtop">
+                
+                <dl>
+                    <dt> 栏目：</dt>
+                    <dd>
+                        <label class="label">{$catid|getCategoryName}</label><input type="hidden" name="catid" value="{$catid}">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> title：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="title"><span class="fontcolor">网页title标签的设置(SEO优化)，不填则默认使用公众帐号</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> keywords：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="keywords"><span class="fontcolor">网页meta标签keywords网页关键词的设置(SEO优化)</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> description：</dt>
+                    <dd>
+                        <textarea name="description" style='float: left;'></textarea><span class="fontcolor" style='float: left; width: 140px;'>网页meta标签description网页描述的设置(SEO优化)</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 帐号类型：</dt>
+                    <dd>
+                        <input type="radio" name="typeid" value="2" checked="checked" />&nbsp;企业号&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="typeid" value="1"  />&nbsp;订阅号
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 公众账号：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="pubaccount"><span class="red">*</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 微信账号：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="wxaccount"><span class="fontcolor">与公众账号关联绑定的微信帐号</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 微信原始号：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="ghweixin" id="ghweixin">
+                        <span class="tip"><a href="">点击查看教程微信原始号怎么获取？</a></span>
+                        <div style="color: #999999;">未认证公号gh_xxxxxxxxxxxxxx 格式，已认证公号格式自定义，<br>点击微信官方二维码图片下载，文件名里面有。</div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 网站地址：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="website" value=""><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 新浪微博：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="sinaweibo" value=""><span class="fontcolor">填写新浪微博地址,带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 腾讯微博：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="tencentweibo" value=""><span class="fontcolor">填写腾讯微博地址,带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 淘宝店铺地址：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="tbshopurl" value=""><span class="fontcolor">填写淘宝店铺地址,带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 拍拍店铺地址：</dt>
+                    <dd>
+                        <input type="text" class="ipt6" name="ppshopurl" value=""><span class="fontcolor">填写拍拍店铺地址,带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 所属地区：</dt>
+                    <dd>
+                        <select name="province" id="province">
+                            <option value="-1" selected>省份</option>
+                            <volist name="province" id="one">
+                                <option value="{$one.id}">{$one.area_name}</option>
+                            </volist>
+                        </select>
+                        <select name="city" id="city">
+                            <option value="-1">城市</option>
+                        </select>
+                        <span class="fontcolor">不选择,将默认是中国</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 微信头像：</dt>
+                    <dd>
+                        <input name="logo" class="thumb" type="file" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 微信网络头像：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="weblogo" value=""><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 微信二维码：</dt>
+                    <dd>
+                        <input name="qrcode" class="thumb" type="file" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 微信网络二维码：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="webqrcode" value=""><span class="fontcolor">带http://</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 星级：</dt>
+                    <dd>
+                        <select name="xingji">
+                            <option value="5">五星</option>
+                            <option value="4">四星</option>
+                            <option value="3">三星</option>
+                            <option value="2">二星</option>
+                            <option value="1">一星</option>
+                        </select>
+                    </dd>
+                </dl>
+               
+                <dl>
+                    <dt> 关注次数：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="hits" value="0">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>联系人：</dt>
+                    <dd>
+                    <input type="text" name="realname" id="realname" class="ipt4">
+                    
+                    <span class="fontcolor">联系人真实姓名</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>联系方式：</dt>
+                    <dd>
+                    <input type="text" name="phone" id="phone" class="ipt5">
+                   
+                    <span class="fontcolor">电话或手机</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>联系QQ：</dt>
+                    <dd>
+                    <input type="text" name="qq" id="qq" class="ipt4">
+                   
+                    <span class="fontcolor">常用QQ</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> Tag标签：</dt>
+                    <dd>
+                        <input type="text" name="tag" class="ipt6"><span class="fontcolor">用空格隔开</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 内容：</dt>
+                </dl>
+                </div>
+                <div class="listbottom">
+                    <textarea name="content" id="myEditor"></textarea>
+                    <script type="text/javascript">
+                        var editor = new UE.ui.Editor();
+                        editor.render("myEditor");
+                        //1.2.4以后可以使用一下代码实例化编辑器
+                        //UE.getEditor('myEditor')
+                    </script>
+                </div>
+                <div class="form_b">
+                    <input type="submit" class="submit btn7" id="submit" value="提 交">
+                </div>
+               </form>
+            </div>
+
+            
+        </div>
+<script type="text/javascript">
+    $(function(){
+       $("#province").change(function(){
+            var ajaxurl="{:U('Ajax/getArea')}";
+            var areaId=this.value;
+            var areaType='city';
+            $.post(ajaxurl,{'areaId':areaId},function(data){
+                
+                if(areaType==='city'){
+                   $('#'+areaType).html('<option value="-1">城市</option>');
+
+                   $('#district').html('<option value="-1">镇/区</option>');
+                }else if(areaType==='district'){
+                   $('#'+areaType).html('<option value="-1">镇/区</option>');
+                }
+                if(areaType!=='null'){
+                    $.each(data,function(no,items){
+                        $('#'+areaType).append('<option value="'+items.id+'">'+items.area_name+'</option>');
+                    });
+                }
+            });
+        }); 
+    });
+</script>
+<include file="Public:footer" />

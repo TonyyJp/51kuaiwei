@@ -1,0 +1,186 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link type="text/css" rel="stylesheet"
+	href="../mobile_file/css/style.css">
+<script src="../mobile_file/img/v.htm" charset="utf-8"></script>
+<script>window.jQuery || document.write('<script src="template/wap/../mobile_file/js/jquery-2.0.3.min.js"><\/script>')</script>
+<script src="../mobile_file/js/jquery-2.js"></script>
+<script type="text/javascript" src="../mobile_file/js/hammer.js"></script>
+<script type="text/javascript" src="../mobile_file/js/common.js"></script>
+<script src="../mobile_file/js/jquery.js" type="text/javascript"></script>
+<script>
+          $(document).ready(function(){
+			  $(".tab").each(function(i) {
+				  $(this).click(function(){
+					  $(".tab").removeClass("cur");
+					  $(this).addClass("cur");
+					  $("#cont .pubcon").hide();
+					  $("#cont .pubcon").eq(i).show();
+					  });
+            });
+	})
+    </script>
+<title>{$weixin['title']} - 微信群大全 - wx131.com</title>
+<meta name="keywords" content="进群加群主，广告随便发">
+<meta name="description" content="进群加群主，广告随便发">
+<script src="../mobile_file/img/share.js"></script>
+<link href="../mobile_file/img/share_style0_32.css" rel="stylesheet">
+</head>
+<body>
+<header class="fixed-top head">
+<div class="fixed">
+<div class="headlf fl"><a href="index.php"><img
+	src="../mobile_file/img/logo.png"></a></div>
+<div class="headrg fr"><a href="index.php?m=Index&a=search"><img
+	src="../mobile_file/img/search.png"></a><a class="headpub"
+	href="javascript:;"><img src="../mobile_file/img/peo.png"></a></div>
+</div>
+<div style="-moz-user-select: none;" class="menu-fn menu hide-me" id="more-fn">
+    <include file="Public:nav" />
+</div>
+</header>
+<div class="wrap-page">
+<div class="conet_all">
+<div class="title">
+{$daohang}
+</div>
+
+<div class="cennr">
+<div class="cenImg fl"><img src="{$weixin['qrcode']}">
+<div class="tool diagBtn">
+
+<div class="mt10"></div>
+</div>
+   <a href="http://www.wx131.com/article-show-id-102.html"
+	style="margin-top: 10px; margin-bottom: 10px; font-size: 14px; display: inline-block"><font
+	style="color: green;">无需扫描,快速加群！点击&gt;&gt;</font></a><br>
+    <if condition="$shang neq ''">
+        <a rel="prev" class="pr_x" href="index.php?m=Index&a=archives&id={$shang['id']}">
+            <img src="../mobile_file/img/pre.png" alt="{$shang['title']}">
+        </a>
+    </if>
+    <if condition="$xia neq ''">
+        <a rel="next" class="pr_x" href="index.php?m=Index&a=archives&id={$xia['id']}">
+            <img src="../mobile_file/img/next.png" alt="{$xia['title']}">
+        </a>
+    </if>
+</div>
+
+<div class="cenWord fr">
+    <p>微信名：{$weixin['title']}</p>
+    <p>微信号：{$weixin['wxaccount']}</p>
+    <p>地区：{$province} <if condition="$province neq '' AND $city neq ''">/</if> {$city}</p>
+    <p>发布时间：{$weixin['create_time']}</p>
+	<p>简介：<if condition="$weixin.content neq ''">{$weixin['content']}<else />无</if></p>
+	 
+	 <p><img src="{$weixin['img1']}"></p>
+          <p><img src="{$weixin['img2']}"></p>
+		   <p><img src="{$weixin['img3']}"></p>
+		    <p><img src="{$weixin['img4']}"></p>
+			 <p><img src="{$weixin['img5']}"></p>
+	 
+	 
+</div>
+
+<div class="clr"></div>
+</div>
+
+</div>
+</div>
+<div class="diagBox" style="height: 1000px;">
+<div style="border-bottom: 1px solid #b9b9b9;" class="code-title">
+<div class="headlf fl">二维码美化</div>
+<div class="headrg fr"><a href="#"><img class="close_x"
+	src="../mobile_file/img/close_03.jpg"></a></div>
+</div>
+<div class="menu-fn menu hide-me" id="more-fn"
+	style="-webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); touch-action: none;">
+</div>
+
+<div class="wrap-page" style="height: 1000px;">
+<div class="conet_all">
+<div class="cennr">
+<div class="cenImg fl cenImg_exm"><iframe id="qrcode_frame"
+	name="qrcode_frame" src="../mobile_file/img/Instead_002.jpg"
+	scrolling="no"> </iframe> <img id="show_qrcode" style="display: none">
+<div class="Choice"
+	style="clear: both; overflow: hidden; height: 130px;">
+<ul class="mblist">
+	<li><img class="imglist_li" src="../mobile_file/img/10.png"></li>
+	<li><img class="imglist_li" src="../mobile_file/img/6.png"></li>
+	<li><img class="imglist_li" src="../mobile_file/img/7.png"></li>
+	<li><img class="imglist_li" src="../mobile_file/img/8.png"></li>
+	<li><img class="imglist_li" src="../mobile_file/img/9.png"></li>
+	<li><img class="imglist_li" src="../mobile_file/img/1.png"></li>
+	<li><img class="imglist_li" src="../mobile_file/img/2.png"></li>
+	<li><img class="imglist_li" src="../mobile_file/img/3.png"></li>
+	<li><img class="imglist_li" src="../mobile_file/img/4.png"></li>
+	<li><img class="imglist_li" src="../mobile_file/img/5.png"></li>
+</ul>
+
+</div>
+
+
+<p
+	style="text-align: center; margin-top: 26px; margin-left: 30px; display: block; width: 290px;">
+</p>
+
+
+<p></p>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+
+<footer class="fixed-bottom foot">
+<div class="foot_return">
+	<span>
+		<?php
+		if($_SESSION['user']){
+			echo '<a class="home" href="' . U('User/index') . '">个人中心</a>';
+			echo '<a class="srh" href="' . U('User/login_out') . '">退出</a>';
+		}else{
+			echo '<a class="home" href="' . U('User/user_login') . '">登录</a>';
+			echo '<a class="srh" href="' . U('User/user_reg') . '">注册</a>';
+		}
+		?>
+	</span>
+</div>
+    <div class="foot_txt">
+	<include file="Public:footer" />
+	</div>
+
+</footer>
+<iframe style="display: none; width: 1px; height: 1px;"
+	src="../mobile_file/img/mp-cdn.htm"></iframe>
+<script>$(document).ready(function(){
+    $(".btimg").lazyload();
+})</script>
+
+<script>
+function praise(id,tid,ztype){
+    var urls="/user-praise.html";
+    var zid="#znum"+id;
+    var cid="#cnum"+id;
+    var znum=parseInt($(zid).attr('znum'));
+    var cnum=parseInt($(cid).attr('cnum'));
+    $.ajax({type: "post",dataType: "json",url: urls,data: "json=1&id="+id+"&cid="+tid+"&ztype="+ztype,success: function(result){if(result.type){if(ztype==1){znum=znum+1;$(zid).attr('znum',znum);$(zid).html(znum);}else{cnum=cnum-1;$(cid).attr('cnum',cnum);$(cid).html(cnum);}alert(result.msg);}else{alert(result.msg);}}});
+}
+</script>
+
+
+
+</body>
+</html>

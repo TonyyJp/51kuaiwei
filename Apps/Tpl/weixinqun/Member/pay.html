@@ -1,0 +1,52 @@
+<include file="Member:header" />
+<!-- 内容 START -->
+<div class="center-content mt20">
+    <div class="wrap w1000">
+        <include file="Member:left" />
+        <div class="right-content fRight">
+            <h2>在线充值</h2>
+            <div class="mainbody mt10">
+                <form method='post' id="form1" name="form1" action="{:U('Member/alipayapi')}">
+                    <div style='border-bottom: 1px dashed #47B717;'>
+                        <label>账户余额：</label>
+                        <span class="star" style="font-size: 22px;font-family: Georgia,Arial;font-weight: 700;}">{:getMemberAmount(session('id'),session('account'))}</span><span>元</span>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <label>充值金额：</label>
+                        <input type="text" name="WIDprice" class="ipt2">
+                        <span class="star">*</span> <span class="tip">请输入充值金额</span>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <label>充值方式：</label>
+                        <present name="paytypelist">
+                            <volist name='paytypelist' id='paytypevo'>
+                                <input type="radio" name="WIDtype" value="{$paytypevo.id}" checked=true style="height:24px;line-height: 24px;" />
+                                <span>{$paytypevo.payname}</span> 
+                            </volist>
+                            <else />
+                            <span>本站暂未开启在线支付功能，如需帮助请联系管理员。</span> 
+                        </present>
+                        <span class="star">*</span> <span class="tip"></span>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <label>备注：</label>
+                        <textarea name="WIDbody" />
+                        </textarea>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <label>验证码：</label>
+                        <input type="text" style="width: 95px;" id="verify" name="verify" class="ipt3">
+                        <img id="verifyImg" src="{:U('Member/verify')}" onClick="fleshVerify()" border="0" alt="点击刷新验证码" style="cursor:pointer" align="absmiddle"></div>
+                    <div style="margin-top:10px;">
+                        <label>&nbsp;</label>
+                        <input type="submit" id="submit" value="提 交" class="submit">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<include file="Member:footer" />    
